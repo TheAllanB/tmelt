@@ -1,0 +1,29 @@
+name: ticketmelt
+version: "0.1"
+description: >
+  Multi-agent RL environment: four on-call engineers coordinate incident response
+  across two production servers. Trains LLMs to break convergent reasoning and
+  adapt to heterogeneous urgency simultaneously.
+interface: gym-http
+endpoints:
+  health: GET /health
+  reset: POST /reset
+  step: POST /step
+  state: GET /state
+action_space:
+  type: discrete
+  choices: [DEPLOY_PROD_A, DEPLOY_PROD_B, MONITOR]
+observation_space:
+  type: dict
+  description: >
+    Current round, own service state (name, fix_rounds_remaining, deadline, urgency_flag),
+    peer progress (public: service, rounds_remaining, deadline, completed), episode history.
+reward:
+  type: binary
+  values: [0.0, 1.0]
+  description: >
+    End-of-episode binary GRPO reward. Continuous components (R1-R4) in info["reward_breakdown"].
+    goodness_threshold: 0.55
+agents: 4
+scripted_peers: 3
+episodes_per_training_prompt: 1
