@@ -145,7 +145,7 @@ class RewardBreakdown:
 
 
 DEFAULT_WEIGHTS = {"r1": 0.4, "r2": 0.3, "r3": 0.2, "r4": 0.1}
-DEFAULT_GOODNESS_THRESHOLD = 0.55  # tune this after first smoke run
+DDEFAULT_GOODNESS_THRESHOLD = 0.72  # tune this after first smoke run
 
 
 def compute_rewards(
