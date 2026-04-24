@@ -145,7 +145,7 @@ class RewardBreakdown:
 
 
 DEFAULT_WEIGHTS = {"r1": 0.4, "r2": 0.3, "r3": 0.2, "r4": 0.1}
-DEFAULT_GOODNESS_THRESHOLD = 0.72  # raised from 0.55 after observing inflated R3
+DEFAULT_GOODNESS_THRESHOLD = 0.68  # raised from 0.55 after observing inflated R3
 
 
 def compute_rewards(
