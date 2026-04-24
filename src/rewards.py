@@ -68,8 +68,8 @@ def reward_r3_clean_deploys(state: State) -> float:
                 my_collision_rounds.append(record)
 
     if not my_deploy_rounds:
-        # Agent never deployed — neutral score (can't win R3 by hiding)
-        return 0.5
+        # Agent never deployed — no credit (doing nothing doesn't help the outage)
+        return 0.0
 
     collision_rate = len(my_collision_rounds) / len(my_deploy_rounds)
     return 1.0 - collision_rate
@@ -145,7 +145,7 @@ class RewardBreakdown:
 
 
 DEFAULT_WEIGHTS = {"r1": 0.4, "r2": 0.3, "r3": 0.2, "r4": 0.1}
-DDEFAULT_GOODNESS_THRESHOLD = 0.72  # tune this after first smoke run
+DEFAULT_GOODNESS_THRESHOLD = 0.72  # raised from 0.55 after observing inflated R3
 
 
 def compute_rewards(
