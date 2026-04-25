@@ -1,8 +1,11 @@
 from __future__ import annotations
 from dataclasses import asdict
+from pathlib import Path
 from typing import Optional
 
 from fastapi import FastAPI, HTTPException
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from pydantic import BaseModel
 
 from .environment import TicketmeltEnv
@@ -10,6 +13,14 @@ from .models import Action, Observation
 
 app = FastAPI(title="TicketMelt", version="0.1.0")
 _env = TicketmeltEnv()
+
+_static_dir = Path(__file__).parent.parent / "static"
+app.mount("/static", StaticFiles(directory=str(_static_dir)), name="static")
+
+
+@app.get("/")
+async def root():
+    return FileResponse(str(_static_dir / "index.html"))
 
 
 class ResetRequest(BaseModel):
