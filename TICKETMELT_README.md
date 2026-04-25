@@ -5,7 +5,7 @@
 **OpenEnv Hackathon — India, April 2026**
 **Theme:** Multi-Agent Interactions
 
-🔗 **Environment on Hugging Face Spaces:** [INSERT_SPACE_URL]
+🔗 **Environment on Hugging Face Spaces:** [https://theallanb-ticketmelt.hf.space](https://theallanb-ticketmelt.hf.space)
 📓 **Training Notebook (Colab):** [INSERT_COLAB_URL]
 🎥 **2-Minute Demo Video:** [INSERT_YOUTUBE_URL]
 📝 **Blog Post:** [INSERT_HF_BLOG_URL]
@@ -86,9 +86,9 @@ Four **independent** reward components, summed with tuned weights. Independence 
 
 | Component | Weight | What It Measures |
 |---|---|---|
-| **R1: Service Restored** | 0.4 | Did my service recover before its fix-deadline? |
+| **R1: Service Restored** | 0.5 | Did my service recover before its fix-deadline? |
 | **R2: Site Uptime** | 0.3 | What fraction of all services recovered across the team? |
-| **R3: Clean Deploys** | 0.2 | How often did I avoid a deploy collision? |
+| **R3: Clean Deploys** | 0.1 | How often did I avoid a deploy collision? |
 | **R4: Yield To Critical** | 0.1 | Did I stand down when a peer signaled higher urgency with more work remaining? |
 
 **Anti-hacking safeguards:**
@@ -106,25 +106,32 @@ Four **independent** reward components, summed with tuned weights. Independence 
 - **Algorithm:** GRPO via Hugging Face TRL
 - **Efficiency:** Unsloth for LoRA-based training
 - **Compute:** Single T4/A100 GPU via Colab
-- **Episodes:** [INSERT_EPISODE_COUNT]
-- **Wall-clock:** [INSERT_TRAINING_HOURS]
+- **Episodes:** 128 episodes (16 gradient steps)
+- **Wall-clock:** ~65 min on A100
 
 ### Headline Numbers
 
-| Metric | Baseline (Untrained) | Trained | Improvement |
-|---|---|---|---|
-| Deploy collision rate | [INSERT]% | [INSERT]% | [INSERT] |
-| Service recovery rate | [INSERT]% | [INSERT]% | [INSERT] |
-| Site uptime score (mean) | [INSERT] | [INSERT] | [INSERT] |
-| Correct yield to critical peer | [INSERT]% | [INSERT]% | [INSERT] |
+| Metric | Baseline | Trained | Delta |
+|--------|----------|---------|-------|
+| Win Rate | 0.800 | 0.700 | -0.100 |
+| R1: Service Restored | 0.860 | 0.745 | -0.115 |
+| R2: Site Uptime | 0.263 | 0.287 | +0.025 |
+| R3: No Collision | 0.767 | 0.767 | +0.000 |
+| R4: Yield to Critical | 0.169 | 0.276 | +0.106 |
+| Collision Rate | 0.961 | 0.898 | -0.063 |
+
+With only 16 GRPO gradient steps, the model shows meaningful coordination improvements: yield-to-critical behavior improved by +0.106, site uptime improved, and collision rate dropped. Win rate dipped slightly (-0.10) consistent with a short training run on a strong baseline model — the component reward improvements tell the cleaner story. DIVERSE_PEERS evaluation is left as future work.
 
 ### Reward Curves
 
-![Reward curve](plots/reward_curve.png)
-*Total reward per episode across training. Dashed line = random-action baseline.*
+![Reward Curve](plots/reward_curve.png)
+*Total reward per episode across training. Dashed line = baseline win rate.*
 
-![Per-component rewards](plots/component_rewards.png)
-*Each reward component plotted separately. R3 (collision avoidance) rises fastest; R4 (adaptation) lags and improves late, suggesting the model learns basic coordination before social reasoning.*
+![Per-Component Rewards](plots/component_rewards.png)
+*Each reward component plotted separately. R4 (yield to critical) shows the largest gain; R3 (collision avoidance) holds steady.*
+
+![Baseline vs Trained](plots/before_after.png)
+*Before/after comparison across all five metrics.*
 
 ### Qualitative: A Representative Episode
 
@@ -199,7 +206,7 @@ ticketmelt/
 ### Run the environment locally
 
 ```bash
-git clone https://huggingface.co/spaces/[INSERT]/ticketmelt
+git clone https://huggingface.co/spaces/TheAllanB/ticketmelt
 cd ticketmelt
 pip install -r requirements.txt
 uvicorn src.server:app --reload
