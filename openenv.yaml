@@ -23,7 +23,7 @@ reward:
   values: [0.0, 1.0]
   description: >
     End-of-episode binary GRPO reward. Continuous components (R1-R4) in info["reward_breakdown"].
-    goodness_threshold: 0.55
+    goodness_threshold: 0.45
 agents: 4
 scripted_peers: 3
 episodes_per_training_prompt: 1
