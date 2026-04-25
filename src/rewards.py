@@ -68,8 +68,7 @@ def reward_r3_clean_deploys(state: State) -> float:
                 my_collision_rounds.append(record)
 
     if not my_deploy_rounds:
-        # Agent never deployed — no credit (doing nothing doesn't help the outage)
-        return 0.0
+        return 0.0  # never deployed = no credit
 
     collision_rate = len(my_collision_rounds) / len(my_deploy_rounds)
     return 1.0 - collision_rate
@@ -144,8 +143,8 @@ class RewardBreakdown:
     binary_grpo_reward: float
 
 
-DEFAULT_WEIGHTS = {"r1": 0.4, "r2": 0.3, "r3": 0.2, "r4": 0.1}
-DEFAULT_GOODNESS_THRESHOLD = 0.68  # raised from 0.55 after observing inflated R3
+DEFAULT_WEIGHTS = {"r1": 0.5, "r2": 0.3, "r3": 0.1, "r4": 0.1}
+DEFAULT_GOODNESS_THRESHOLD = 0.45  # raised from 0.55 after observing inflated R3
 
 
 def compute_rewards(
