@@ -322,6 +322,50 @@ footer{
   border-top:1px solid var(--border);padding:32px;text-align:center;
   color:rgba(0,255,127,0.3);font-size:11px;letter-spacing:2px;
 }
+
+/* SECTION LABEL */
+.section-label{font-size:10px;letter-spacing:4px;color:rgba(0,255,127,0.3);margin-bottom:12px;}
+
+/* HERO ENHANCEMENTS */
+.ht{color:var(--green);text-shadow:var(--glow);}
+.hm{color:var(--amber);text-shadow:0 0 12px var(--amber),0 0 32px rgba(255,179,0,0.4);}
+.hero-desc{max-width:600px;font-size:13px;color:rgba(0,255,127,0.5);line-height:2;margin-bottom:32px;letter-spacing:.5px;}
+.scroll-indicator{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:4px;font-size:9px;letter-spacing:3px;color:rgba(0,255,127,0.28);}
+.scroll-chevron{animation:scroll-bounce 1.8s ease-in-out infinite;font-size:13px;line-height:1;}
+@keyframes scroll-bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+
+/* DEMO PANELS */
+.demo-panel{margin-bottom:32px;border:1px solid var(--border);}
+.demo-panel-header{display:flex;align-items:center;gap:12px;padding:10px 16px;border-bottom:1px solid var(--border);font-size:10px;letter-spacing:3px;color:rgba(0,255,127,0.5);background:rgba(0,255,127,0.02);}
+.demo-panel-body{padding:20px;}
+.panel-letter{font-family:'Orbitron',sans-serif;font-size:12px;font-weight:700;color:var(--amber);text-shadow:0 0 8px var(--amber);border:1px solid rgba(255,179,0,0.45);padding:2px 7px;}
+.panel-divider{display:flex;align-items:center;gap:12px;font-size:10px;letter-spacing:3px;color:rgba(0,255,127,0.4);margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid rgba(0,255,127,0.1);}
+
+/* NEURAL REWIRING */
+.network-outer{transform:perspective(800px) rotateX(4deg) rotateY(-4deg);transform-style:preserve-3d;width:100%;}
+#nw-svg{width:100%;height:auto;display:block;max-height:300px;}
+.nw-edge{fill:none;stroke-linecap:round;transition:stroke-width .35s ease,opacity .35s ease;}
+.nw-node-a{fill:rgba(79,195,247,0.08);stroke:rgba(79,195,247,0.35);stroke-width:1;}
+.nw-node-b{fill:rgba(255,179,0,0.08);stroke:rgba(255,179,0,0.35);stroke-width:1;}
+.nw-node-agent{fill:rgba(0,255,127,0.05);stroke:rgba(0,255,127,0.35);stroke-width:1;}
+.nw-node-emg{fill:rgba(0,255,127,0.07);stroke:rgba(0,255,127,0.6);stroke-width:1.5;}
+.nw-lbl{font-family:"Share Tech Mono",monospace;font-size:11px;fill:rgba(0,255,127,0.75);dominant-baseline:middle;text-anchor:middle;}
+.nw-lbl-a{fill:rgba(79,195,247,0.9);}
+.nw-lbl-b{fill:rgba(255,179,0,0.9);}
+.nw-ring{fill:none;transition:opacity .35s ease,r .35s ease;}
+.nw-slider-row{display:flex;align-items:center;gap:12px;font-size:10px;letter-spacing:2px;color:rgba(0,255,127,0.5);}
+#nw-slider{flex:1;-webkit-appearance:none;appearance:none;height:3px;background:rgba(0,255,127,0.15);outline:none;cursor:pointer;border-radius:2px;}
+#nw-slider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:14px;height:14px;border-radius:50%;background:var(--amber);box-shadow:0 0 8px var(--amber);cursor:pointer;}
+#nw-slider::-moz-range-thumb{width:14px;height:14px;border-radius:50%;border:none;background:var(--amber);box-shadow:0 0 8px var(--amber);cursor:pointer;}
+.nw-metrics{display:flex;gap:12px;margin-top:12px;}
+.nw-metric{flex:1;border:1px solid var(--border);padding:12px;text-align:center;background:rgba(0,0,0,0.3);}
+.nw-metric-val{font-family:'Orbitron',sans-serif;font-size:20px;font-weight:700;color:var(--amber);transition:color .4s ease;}
+.nw-metric-val.improved{color:var(--green);}
+.nw-metric-lbl{font-size:9px;letter-spacing:2px;color:rgba(0,255,127,0.4);margin-top:4px;}
+
+/* TRAINING RESEARCH FRAMING */
+.research-framing{border-left:2px solid rgba(0,255,127,0.2);padding-left:20px;margin-bottom:32px;font-size:12px;color:rgba(0,255,127,0.5);line-height:2;}
+.research-framing strong{color:rgba(0,255,127,0.75);}
 </style>
 </head>
 <body>
@@ -343,10 +387,11 @@ footer{
 <section id="hero">
   <div id="hero-grid"></div>
   <div class="hero-badge">◈ OPENENV HACKATHON — APR 2026</div>
-  <h1>TICKETMELT</h1>
+  <h1><span class="ht">TICKET</span><span class="hm">MELT</span></h1>
   <div class="hero-subtitle">
     MULTI-AGENT COORDINATION · SIMULTANEOUS RESOURCE CONTENTION · GRPO TRAINING
   </div>
+  <p class="hero-desc">A reinforcement learning environment that trains LLMs to break convergent deadlock and adapt to heterogeneous urgency — two failure modes documented in frontier models as recently as early 2026.</p>
   <div class="hero-stats">
     <div class="stat"><div class="stat-val">4</div><div class="stat-label">AGENTS</div></div>
     <div class="stat"><div class="stat-val">2</div><div class="stat-label">SERVERS</div></div>
@@ -357,10 +402,15 @@ footer{
     <a href="#demo" class="btn">▶ LIVE DEMO</a>
     <a href="https://theallanb-ticketmelt.hf.space/state" class="btn btn-amber" target="_blank">◈ API ENDPOINT</a>
   </div>
+  <div class="scroll-indicator">
+    <span>SCROLL</span>
+    <span class="scroll-chevron">∨</span>
+  </div>
 </section>
 
 <!-- PROBLEM -->
 <section id="problem" style="padding-top:100px;">
+  <div class="section-label">◈ 01 / PROBLEM STATEMENT</div>
   <div class="section-title">Why LLMs Deadlock Under Pressure</div>
   <div class="section-sub">◈ DOCUMENTED FAILURE MODES IN FRONTIER MODELS — 2024–2026</div>
   <div class="cards-2x2">
@@ -389,9 +439,87 @@ footer{
 
 <!-- DEMO -->
 <section id="demo" style="padding-top:100px;">
+  <div class="section-label">◈ 02 / INTERACTIVE DEMO</div>
   <div class="section-title">Live Demo</div>
   <div class="section-sub">◈ HARDCODED EPISODE REPLAY + LIVE ENVIRONMENT STATE</div>
 
+  <!-- PANEL A: Neural Rewiring -->
+  <div class="demo-panel">
+    <div class="demo-panel-header"><span class="panel-letter">A</span> NEURAL REWIRING — HOW TRAINING RESHAPES POLICY WEIGHTS</div>
+    <div class="demo-panel-body">
+      <div class="network-outer">
+        <svg id="nw-svg" viewBox="0 0 900 380" xmlns="http://www.w3.org/2000/svg">
+          <!-- EDGES (drawn first, behind nodes) -->
+          <path id="nw-e0" class="nw-edge" d="M 112,70 C 380,70 520,150 755,150"   stroke="#4fc3f7"/>
+          <path id="nw-e1" class="nw-edge" d="M 112,70 C 380,70 520,270 755,270"   stroke="#ffb300"/>
+          <path id="nw-e2" class="nw-edge" d="M 112,150 C 380,150 520,150 755,150" stroke="#4fc3f7"/>
+          <path id="nw-e3" class="nw-edge" d="M 112,150 C 380,150 520,270 755,270" stroke="#ffb300"/>
+          <path id="nw-e4" class="nw-edge" d="M 112,230 C 380,230 520,150 755,150" stroke="#4fc3f7"/>
+          <path id="nw-e5" class="nw-edge" d="M 112,230 C 380,230 520,270 755,270" stroke="#00ff7f"/>
+          <path id="nw-e6" class="nw-edge" d="M 112,310 C 380,310 520,150 755,150" stroke="#4fc3f7"/>
+          <path id="nw-e7" class="nw-edge" d="M 112,310 C 380,310 520,270 755,270" stroke="#ffb300"/>
+
+          <!-- COLLISION RING at PROD_A -->
+          <circle id="nw-ring" class="nw-ring" cx="755" cy="150" r="32" stroke="#ff4444" stroke-width="2.5"/>
+
+          <!-- AGENT NODES (left column) -->
+          <circle cx="90" cy="70"  r="22" class="nw-node-agent"/>
+          <text x="90" y="70"  class="nw-lbl">UAL-441</text>
+
+          <circle cx="90" cy="150" r="22" class="nw-node-agent"/>
+          <text x="90" y="150" class="nw-lbl">DAL-892</text>
+
+          <circle cx="90" cy="230" r="22" class="nw-node-emg"/>
+          <text x="90" y="225" class="nw-lbl">SWA-77</text>
+          <text x="90" y="238" class="nw-lbl" style="font-size:9px;fill:rgba(255,68,68,0.8);">⚠ CRIT</text>
+
+          <circle cx="90" cy="310" r="22" class="nw-node-agent"/>
+          <text x="90" y="310" class="nw-lbl">AAL-213</text>
+
+          <!-- SERVER NODES (right column) -->
+          <rect x="755" y="125" width="110" height="50" rx="4" class="nw-node-a"/>
+          <text x="810" y="147" class="nw-lbl nw-lbl-a">PROD_A</text>
+          <text x="810" y="161" class="nw-lbl nw-lbl-a" style="font-size:9px;opacity:.6;">SERVER A</text>
+
+          <rect x="755" y="245" width="110" height="50" rx="4" class="nw-node-b"/>
+          <text x="810" y="267" class="nw-lbl nw-lbl-b">PROD_B</text>
+          <text x="810" y="281" class="nw-lbl nw-lbl-b" style="font-size:9px;opacity:.6;">SERVER B</text>
+
+          <!-- COLUMN LABELS -->
+          <text x="90" y="22" class="nw-lbl" style="font-size:9px;letter-spacing:2px;opacity:.5;">AGENTS</text>
+          <text x="810" y="108" class="nw-lbl" style="font-size:9px;letter-spacing:2px;opacity:.5;">SERVERS</text>
+
+          <!-- STEP INDICATOR -->
+          <text id="nw-step-bg" x="450" y="360" class="nw-lbl" style="font-size:10px;letter-spacing:2px;opacity:.4;text-anchor:middle;">GRADIENT STEP: <tspan id="nw-step-svg">0</tspan> / 16</text>
+        </svg>
+      </div>
+      <div style="margin-top:12px;">
+        <div class="nw-slider-row">
+          <span>STEP 0</span>
+          <input type="range" id="nw-slider" min="0" max="16" value="0" step="1">
+          <span>STEP 16</span>
+          <span id="nw-step-label" style="min-width:50px;text-align:right;">0 / 16</span>
+        </div>
+        <div class="nw-metrics">
+          <div class="nw-metric">
+            <div class="nw-metric-val" id="nw-sym">0.95</div>
+            <div class="nw-metric-lbl">SYMMETRY ↓</div>
+          </div>
+          <div class="nw-metric">
+            <div class="nw-metric-val" id="nw-coll">96%</div>
+            <div class="nw-metric-lbl">COLL RISK ↓</div>
+          </div>
+          <div class="nw-metric">
+            <div class="nw-metric-val" id="nw-yield">0.17</div>
+            <div class="nw-metric-lbl">R4 YIELD ↑</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PANEL B: Episode Replay -->
+  <div class="panel-divider"><span class="panel-letter">B</span> EPISODE REPLAY — UNTRAINED VS TRAINED</div>
   <div id="demo-wrapper">
     <!-- RADAR -->
     <div id="radar-wrap">
@@ -467,7 +595,7 @@ footer{
   <!-- LIVE API PANEL -->
   <div id="live-panel">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
-      <div class="section-title" style="font-size:18px;margin-bottom:0;">◈ LIVE ENVIRONMENT STATE</div>
+      <div class="section-title" style="font-size:18px;margin-bottom:0;display:flex;align-items:center;gap:12px;"><span class="panel-letter">C</span> LIVE ENVIRONMENT STATE</div>
       <div class="api-status">
         <div class="status-dot" id="status-dot"></div>
         <span id="status-text" style="font-size:11px;letter-spacing:2px;color:rgba(0,255,127,0.6);">CHECKING…</span>
@@ -508,6 +636,7 @@ footer{
 
 <!-- REWARDS -->
 <section id="rewards" style="padding-top:100px;">
+  <div class="section-label">◈ 03 / REWARD DESIGN</div>
   <div class="section-title">Reward Design</div>
   <div class="section-sub">◈ FOUR INDEPENDENT COMPONENTS — GAMING ONE DOESN'T EARN THE OTHERS</div>
   <div class="reward-cards">
@@ -540,6 +669,7 @@ footer{
 
 <!-- RESULTS -->
 <section id="results" style="padding-top:100px;">
+  <div class="section-label">◈ 04 / TRAINING RESULTS</div>
   <div class="section-title">Results</div>
   <div class="section-sub">◈ 20-EPISODE EVAL · QWEN-2.5-3B-INSTRUCT · 16 GRPO GRADIENT STEPS</div>
   <div class="results-grid">
@@ -578,8 +708,13 @@ footer{
 
 <!-- TRAINING CONFIG -->
 <section id="training" style="padding-top:100px;">
+  <div class="section-label">◈ 05 / TRAINING CONFIGURATION</div>
   <div class="section-title">Training Configuration</div>
   <div class="section-sub">◈ QWEN-2.5-3B-INSTRUCT · GRPO · UNSLOTH · A100 40GB</div>
+  <div class="research-framing">
+    <p><strong>Motivation:</strong> DPBench (Feb 2026) showed frontier LLMs deadlock above 95% on simultaneous coordination tasks — adding a communication channel made it worse, not better. NeurIPS 2024 Concordia Contest showed LLM agents fail when peers have heterogeneous urgency levels. TICKETMELT targets both failure modes in one training scenario.</p>
+    <p><strong>Training signal:</strong> Binary GRPO reward — 1.0 when service restored within deadline and composite score above threshold, 0.0 otherwise. Continuous component breakdown logged for analysis. No expert demonstrations. No supervised warmup. Pure RL from environment interaction.</p>
+  </div>
   <div class="config-grid">
     <div class="config-box">
       <div class="config-box-title">MODEL &amp; TRAINING</div>
@@ -616,6 +751,7 @@ footer{
 
 <!-- LINKS -->
 <section id="links" style="padding-top:100px;padding-bottom:80px;">
+  <div class="section-label">◈ 06 / RESOURCES</div>
   <div class="section-title">Resources</div>
   <div class="section-sub">◈ LIVE ENVIRONMENT · API · SOURCE</div>
   <div class="links-grid">
@@ -638,7 +774,8 @@ footer{
 </section>
 
 <footer>
-  TICKETMELT · OPENENV HACKATHON APR 2026 · MIT LICENSE · 31 TESTS PASSING
+  <span class="status-dot" style="display:inline-block;margin-right:8px;width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);vertical-align:middle;animation:pulse 2s ease-in-out infinite;"></span>
+  SYSTEM NOMINAL &nbsp;·&nbsp; TICKETMELT · OPENENV HACKATHON APR 2026 · MIT LICENSE · 31 TESTS PASSING
 </footer>
 
 <script>
@@ -1280,6 +1417,90 @@ if(resultsSection)observer.observe(resultsSection);
 // Initial render at 0 in case already visible
 drawBarChart(0);
 drawLineChart();
+
+// ═══════════════════════════════════════════════
+// NEURAL REWIRING
+// ═══════════════════════════════════════════════
+const NW_EDGES = [
+  { w0:0.85, w16:0.35, color:'#4fc3f7' }, // UAL→A
+  { w0:0.15, w16:0.65, color:'#ffb300' }, // UAL→B
+  { w0:0.80, w16:0.55, color:'#4fc3f7' }, // DAL→A
+  { w0:0.20, w16:0.45, color:'#ffb300' }, // DAL→B
+  { w0:0.75, w16:0.30, color:'#4fc3f7' }, // SWA→A (emergency learns to vacate A)
+  { w0:0.25, w16:0.70, color:'#00ff7f' }, // SWA→B (emergency learns B)
+  { w0:0.82, w16:0.45, color:'#4fc3f7' }, // AAL→A
+  { w0:0.18, w16:0.55, color:'#ffb300' }, // AAL→B
+];
+
+function updateNW(step){
+  const t = step / 16;
+  NW_EDGES.forEach((e,i)=>{
+    const w = e.w0 + (e.w16 - e.w0) * t;
+    const el = document.getElementById('nw-e'+i);
+    if(!el) return;
+    el.style.strokeWidth = (w * 9 + 0.5).toFixed(2);
+    el.style.opacity = (0.12 + w * 0.88).toFixed(3);
+  });
+
+  // Collision ring
+  const ring = document.getElementById('nw-ring');
+  if(ring){
+    const risk = 1 - t;
+    ring.setAttribute('stroke', risk > 0.5 ? '#ff4444' : '#ffb300');
+    ring.style.opacity = (0.2 + risk * 0.7).toFixed(3);
+  }
+
+  // Metrics
+  const sym  = (0.95 - 0.53 * t).toFixed(2);
+  const coll = Math.round(96 - 73 * t) + '%';
+  const yld  = (0.17 + 0.11 * t).toFixed(2);
+
+  const symEl  = document.getElementById('nw-sym');
+  const collEl = document.getElementById('nw-coll');
+  const yldEl  = document.getElementById('nw-yield');
+
+  if(symEl){
+    symEl.textContent = sym;
+    symEl.className = 'nw-metric-val' + (t > 0.5 ? ' improved' : '');
+  }
+  if(collEl){
+    collEl.textContent = coll;
+    collEl.className = 'nw-metric-val' + (t > 0.5 ? ' improved' : '');
+  }
+  if(yldEl){
+    yldEl.textContent = yld;
+    yldEl.className = 'nw-metric-val' + (t > 0.3 ? ' improved' : '');
+  }
+
+  const stepSvg = document.getElementById('nw-step-svg');
+  if(stepSvg) stepSvg.textContent = step;
+  const stepLbl = document.getElementById('nw-step-label');
+  if(stepLbl) stepLbl.textContent = step + ' / 16';
+}
+
+// Ring pulse animation
+let _nwRingPhase = 0;
+function _animateNwRing(){
+  _nwRingPhase += 0.04;
+  const ring = document.getElementById('nw-ring');
+  if(ring){
+    const step = parseInt(document.getElementById('nw-slider')?.value || '0');
+    const t = step / 16;
+    const pulse = Math.sin(_nwRingPhase) * 4 * (1 - t * 0.85);
+    const baseR = 32 - t * 10;
+    ring.setAttribute('r', (baseR + pulse).toFixed(1));
+  }
+  requestAnimationFrame(_animateNwRing);
+}
+
+document.addEventListener('DOMContentLoaded', ()=>{
+  const slider = document.getElementById('nw-slider');
+  if(slider){
+    slider.addEventListener('input', ()=> updateNW(parseInt(slider.value)));
+    updateNW(0);
+  }
+  _animateNwRing();
+});
 </script>
 </body>
 </html>
