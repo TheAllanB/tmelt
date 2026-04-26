@@ -8,367 +8,218 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --bg:#020a06;--green:#00ff7f;--amber:#ffb300;--red:#ff4444;--blue:#4fc3f7;
-  --pink:#f48fb1;--dim:#1a2e1f;--border:rgba(0,255,127,0.18);
-  --glow:0 0 8px #00ff7f,0 0 24px rgba(0,255,127,0.4);
+  --bg:#020a06;--green:#00ff7f;--amber:#ffb300;--red:#ff3b3b;--blue:#4fc3f7;
+  --pink:#ff7eb3;--border:rgba(0,255,127,0.15);
+  --glow:0 0 40px #00ff7f,0 0 80px rgba(0,255,127,0.3);
   --glow-sm:0 0 6px rgba(0,255,127,0.6);
 }
 html{scroll-behavior:smooth}
-body{
-  background:var(--bg);color:var(--green);
-  font-family:'Share Tech Mono',monospace;font-size:14px;
-  overflow-x:hidden;
-}
-body::before{
-  content:'';position:fixed;top:0;left:0;right:0;bottom:0;pointer-events:none;z-index:9998;
-  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,255,127,0.025) 2px,rgba(0,255,127,0.025) 4px);
-}
+body{background:var(--bg);color:var(--green);font-family:'Share Tech Mono',monospace;font-size:14px;overflow-x:hidden;}
+@keyframes gridPulse{0%,100%{opacity:.4}50%{opacity:.7}}
+@keyframes dangerPulse{0%,100%{opacity:.6}50%{opacity:.9}}
+@keyframes greenPulse{0%,100%{box-shadow:0 0 6px #00ff7f}50%{box-shadow:0 0 20px #00ff7f}}
+@keyframes emergencyPulse{0%,100%{box-shadow:0 0 8px #ff3b3b}50%{box-shadow:0 0 25px #ff3b3b}}
+@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
+@keyframes fadeIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@keyframes sweep{to{transform:rotate(360deg)}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+@keyframes flashRed{0%,100%{background:transparent}50%{background:rgba(255,59,59,.15)}}
 
 /* NAV */
-nav{
-  position:fixed;top:0;left:0;right:0;z-index:1000;
-  background:rgba(2,10,6,0.92);border-bottom:1px solid var(--border);
-  display:flex;align-items:center;justify-content:space-between;
-  padding:0 32px;height:52px;backdrop-filter:blur(8px);
-}
-.nav-logo{font-family:'Orbitron',sans-serif;font-weight:900;font-size:16px;
-  color:var(--green);text-shadow:var(--glow-sm);letter-spacing:3px;}
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(2,10,6,.92);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 32px;height:52px;backdrop-filter:blur(8px);}
+.nav-logo{font-family:'Orbitron',sans-serif;font-weight:900;font-size:16px;color:var(--green);text-shadow:var(--glow-sm);letter-spacing:3px;}
 .nav-links{display:flex;gap:24px}
-.nav-links a{color:rgba(0,255,127,0.7);text-decoration:none;font-size:12px;
-  letter-spacing:2px;transition:all .2s;}
+.nav-links a{color:rgba(0,255,127,.7);text-decoration:none;font-size:12px;letter-spacing:2px;transition:all .2s;}
 .nav-links a:hover{color:var(--green);text-shadow:var(--glow-sm);}
 
 /* SECTIONS */
 section{padding:80px 0;max-width:1200px;margin:0 auto;padding-left:32px;padding-right:32px;}
-.section-title{
-  font-family:'Orbitron',sans-serif;font-size:28px;font-weight:700;
-  color:var(--green);text-shadow:var(--glow);margin-bottom:8px;letter-spacing:2px;
-}
-.section-sub{color:rgba(0,255,127,0.5);font-size:12px;letter-spacing:3px;margin-bottom:40px;}
+.section-label{font-size:10px;letter-spacing:4px;color:rgba(0,255,127,.3);margin-bottom:12px;}
+.section-title{font-family:'Orbitron',sans-serif;font-size:28px;font-weight:700;color:var(--green);text-shadow:var(--glow);margin-bottom:8px;letter-spacing:2px;}
+.section-sub{color:rgba(0,255,127,.5);font-size:12px;letter-spacing:3px;margin-bottom:40px;}
 
 /* HERO */
-#hero{
-  min-height:100vh;display:flex;flex-direction:column;justify-content:center;
-  align-items:center;text-align:center;position:relative;overflow:hidden;
-  padding-top:52px;
-}
-#hero-grid{
-  position:absolute;inset:0;pointer-events:none;
-  background-image:linear-gradient(rgba(0,255,127,0.07) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(0,255,127,0.07) 1px,transparent 1px);
-  background-size:60px 60px;
-  animation:grid-pulse 4s ease-in-out infinite;
-}
-@keyframes grid-pulse{0%,100%{opacity:.6}50%{opacity:1}}
-.hero-badge{
-  font-size:11px;letter-spacing:4px;color:var(--amber);
-  border:1px solid var(--amber);padding:4px 16px;margin-bottom:24px;
-  text-shadow:0 0 8px var(--amber);
-}
-h1{
-  font-family:'Orbitron',sans-serif;font-size:clamp(48px,8vw,96px);font-weight:900;
-  color:var(--green);text-shadow:var(--glow);line-height:1;margin-bottom:24px;
-  letter-spacing:4px;
-}
-.hero-subtitle{
-  font-size:12px;letter-spacing:3px;color:rgba(0,255,127,0.6);
-  margin-bottom:40px;max-width:700px;line-height:2;
-}
-.hero-stats{
-  display:flex;gap:48px;margin-bottom:48px;
-}
+#hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;position:relative;overflow:hidden;padding-top:52px;}
+#hero-grid{position:absolute;inset:0;pointer-events:none;
+  background-image:linear-gradient(#0a2a14 1px,transparent 1px),linear-gradient(90deg,#0a2a14 1px,transparent 1px);
+  background-size:40px 40px;animation:gridPulse 4s ease-in-out infinite;}
+.hero-badge{font-size:11px;letter-spacing:4px;color:var(--amber);border:1px solid var(--amber);padding:4px 16px;margin-bottom:24px;text-shadow:0 0 8px var(--amber);position:relative;z-index:1;}
+h1{font-family:'Orbitron',sans-serif;font-size:clamp(48px,8vw,96px);font-weight:900;line-height:1;margin-bottom:24px;letter-spacing:4px;position:relative;z-index:1;}
+.ht{color:var(--green);text-shadow:0 0 40px #00ff7f,0 0 80px rgba(0,255,127,.3);}
+.hm{color:var(--amber);text-shadow:0 0 40px var(--amber),0 0 80px rgba(255,179,0,.3);}
+.hero-subtitle{font-size:12px;letter-spacing:3px;color:rgba(0,255,127,.6);margin-bottom:16px;max-width:700px;line-height:2;position:relative;z-index:1;}
+.hero-desc{max-width:640px;font-size:13px;color:rgba(0,255,127,.5);line-height:1.9;margin-bottom:40px;position:relative;z-index:1;}
+.hero-stats{display:flex;gap:48px;margin-bottom:48px;position:relative;z-index:1;}
 .stat{text-align:center}
-.stat-val{font-family:'Orbitron',sans-serif;font-size:36px;font-weight:900;
-  color:var(--amber);text-shadow:0 0 12px var(--amber);}
-.stat-label{font-size:10px;letter-spacing:2px;color:rgba(0,255,127,0.5);margin-top:4px;}
-.hero-btns{display:flex;gap:16px}
-.btn{
-  font-family:'Share Tech Mono',monospace;font-size:13px;letter-spacing:2px;
-  padding:12px 28px;cursor:pointer;border:1px solid var(--green);
-  background:transparent;color:var(--green);transition:all .25s;text-decoration:none;
-  display:inline-block;
-}
-.btn:hover{background:rgba(0,255,127,0.12);text-shadow:var(--glow-sm);box-shadow:var(--glow-sm);}
+.stat-val{font-family:'Orbitron',sans-serif;font-size:32px;font-weight:900;color:var(--amber);text-shadow:0 0 12px var(--amber);}
+.stat-label{font-size:10px;letter-spacing:2px;color:rgba(0,255,127,.5);margin-top:4px;}
+.hero-btns{display:flex;gap:16px;position:relative;z-index:1;}
+.btn{font-family:'Share Tech Mono',monospace;font-size:13px;letter-spacing:2px;padding:12px 28px;cursor:pointer;border:1px solid var(--green);background:transparent;color:var(--green);transition:all .25s;text-decoration:none;display:inline-block;}
+.btn:hover{background:rgba(0,255,127,.12);text-shadow:var(--glow-sm);box-shadow:var(--glow-sm);}
 .btn-amber{border-color:var(--amber);color:var(--amber);}
-.btn-amber:hover{background:rgba(255,179,0,0.1);text-shadow:0 0 8px var(--amber);}
+.btn-amber:hover{background:rgba(255,179,0,.1);text-shadow:0 0 8px var(--amber);}
+.scroll-ind{position:absolute;bottom:28px;left:50%;font-size:20px;color:rgba(0,255,127,.35);animation:bounce 2s ease-in-out infinite;line-height:1;}
 
-/* CARDS */
+/* CARDS — amber left border per spec */
 .cards-2x2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-.card{
-  border:1px solid var(--border);padding:28px;position:relative;overflow:hidden;
-  background:rgba(0,255,127,0.02);transition:border-color .25s,background .25s;
-}
-.card:hover{border-color:rgba(0,255,127,0.4);background:rgba(0,255,127,0.04);}
-.card::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:2px;
-  background:var(--green);opacity:.5;
-}
-.card-num{
-  font-family:'Orbitron',sans-serif;font-size:28px;font-weight:900;
-  color:var(--amber);text-shadow:0 0 12px var(--amber);margin-bottom:8px;
-}
+.card{border:1px solid var(--border);border-left:3px solid var(--amber);padding:28px;background:rgba(0,255,127,.02);transition:background .25s;}
+.card:hover{background:rgba(0,255,127,.04);}
+.card-num{font-family:'Orbitron',sans-serif;font-size:28px;font-weight:900;color:var(--amber);text-shadow:0 0 12px var(--amber);margin-bottom:8px;}
 .card-title{font-size:13px;letter-spacing:2px;color:var(--green);margin-bottom:12px;}
-.card-body{font-size:12px;color:rgba(0,255,127,0.6);line-height:1.8;}
+.card-body{font-size:12px;color:rgba(0,255,127,.6);line-height:1.8;}
 
-/* DEMO SECTION */
-#demo-wrapper{
-  display:grid;grid-template-columns:420px 1fr;gap:24px;align-items:start;
-}
-#radar-wrap{position:relative;}
-#radar{border:1px solid var(--border);background:#000d05;display:block;}
-.radar-label{
-  font-size:10px;letter-spacing:2px;color:rgba(0,255,127,0.4);
-  margin-top:8px;text-align:center;
-}
+/* NEURAL REWIRING PANEL */
+.nw-panel{background:#030d06;border:1px solid #0f3a1a;margin-bottom:32px;}
+.nw-header{display:flex;align-items:center;gap:10px;padding:12px 20px;border-bottom:1px solid #0f3a1a;font-size:10px;letter-spacing:3px;color:rgba(0,255,127,.5);}
+.live-dot{width:8px;height:8px;border-radius:50%;background:var(--green);flex-shrink:0;animation:greenPulse 2s ease-in-out infinite;}
+.rewiring-viewport{perspective:1200px;perspective-origin:50% 45%;padding:20px 20px 8px;}
+.rewiring-scene{transform:rotateX(12deg) rotateY(-6deg) rotateZ(1deg);transform-style:preserve-3d;}
+#nw-svg{width:100%;display:block;max-height:420px;}
+.nw-controls{padding:12px 20px 16px;border-top:1px solid #0f3a1a;}
+.step-slider-wrap{display:flex;align-items:center;gap:12px;margin-bottom:14px;font-size:10px;letter-spacing:2px;color:rgba(0,255,127,.5);}
+#step-slider{flex:1;-webkit-appearance:none;appearance:none;height:3px;background:rgba(0,255,127,.15);outline:none;cursor:pointer;border-radius:2px;}
+#step-slider::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;border-radius:50%;background:var(--amber);box-shadow:0 0 8px var(--amber);cursor:pointer;}
+#step-slider::-moz-range-thumb{width:14px;height:14px;border-radius:50%;border:none;background:var(--amber);box-shadow:0 0 8px var(--amber);cursor:pointer;}
+.nw-metrics-row{display:flex;gap:12px;margin-bottom:10px;}
+.nw-m{flex:1;border:1px solid #0f3a1a;padding:10px;text-align:center;background:rgba(0,0,0,.4);}
+.nw-m-val{font-family:'Orbitron',sans-serif;font-size:17px;font-weight:700;color:var(--amber);transition:color .4s;}
+.nw-m-val.good{color:var(--green);}
+.nw-m-lbl{font-size:9px;letter-spacing:2px;color:rgba(0,255,127,.4);margin-top:3px;}
+#nw-annotation{font-size:10px;letter-spacing:1.5px;color:rgba(0,255,127,.45);text-align:center;padding:4px 0;min-height:20px;}
+.nw-hint{font-size:10px;color:rgba(0,255,127,.3);text-align:center;padding:4px 0;}
 
-/* CONTROL PANEL */
-#ctrl-panel{display:flex;flex-direction:column;gap:16px;}
-.mode-toggle{display:flex;gap:0;}
-.mode-btn{
-  flex:1;padding:10px;font-family:'Share Tech Mono',monospace;font-size:12px;
-  letter-spacing:2px;cursor:pointer;border:1px solid var(--border);
-  background:transparent;color:rgba(0,255,127,0.4);transition:all .2s;
-}
-.mode-btn.active{background:rgba(0,255,127,0.12);color:var(--green);
-  border-color:var(--green);text-shadow:var(--glow-sm);}
-.panel-title{font-size:10px;letter-spacing:3px;color:rgba(0,255,127,0.4);margin-bottom:8px;}
-
-/* FLIGHT STRIPS */
-#strips-container{display:flex;flex-direction:column;gap:8px;}
-.strip{
-  display:grid;grid-template-columns:90px 1fr 80px 60px;align-items:center;
-  gap:10px;padding:10px 14px;border:1px solid var(--border);
-  background:rgba(0,255,127,0.02);transition:all .3s;position:relative;overflow:hidden;
-}
+/* RADAR SECTION */
+.radar-section{background:#030d06;border:1px solid #0f3a1a;margin-bottom:24px;}
+.radar-header{padding:12px 20px;border-bottom:1px solid #0f3a1a;font-size:10px;letter-spacing:3px;color:rgba(0,255,127,.5);}
+.radar-layout{display:grid;grid-template-columns:60% 40%;}
+.radar-left{padding:16px;position:relative;}
+#radar-canvas{display:block;background:#020a06;width:100%;border:1px solid #0f3a1a;}
+.radar-lbl{font-size:9px;letter-spacing:2px;color:rgba(0,255,127,.3);margin-top:6px;text-align:center;}
+.radar-right{padding:16px;display:flex;flex-direction:column;gap:10px;border-left:1px solid #0f3a1a;}
+.mode-toggle{display:flex;}
+.mode-btn{flex:1;padding:9px;font-family:'Share Tech Mono',monospace;font-size:11px;letter-spacing:1px;cursor:pointer;border:1px solid var(--border);background:transparent;color:rgba(0,255,127,.4);transition:all .2s;}
+.mode-btn.active{background:rgba(0,255,127,.12);color:var(--green);border-color:var(--green);text-shadow:var(--glow-sm);}
+.panel-title{font-size:9px;letter-spacing:3px;color:rgba(0,255,127,.4);margin-bottom:5px;}
+.strip{display:grid;grid-template-columns:76px 1fr 64px 46px;align-items:center;gap:6px;padding:7px 9px;border:1px solid var(--border);background:rgba(0,255,127,.01);transition:all .3s;position:relative;}
 .strip.rwy-a{border-left:3px solid var(--blue);}
 .strip.rwy-b{border-left:3px solid var(--amber);}
-.strip.collision{border-left:3px solid var(--red);animation:flash-red .4s ease 3;}
-.strip.landed{border-left:3px solid rgba(0,255,127,0.3);opacity:.5;}
+.strip.collision{border-left:3px solid var(--red);animation:flashRed .4s ease 3;}
+.strip.landed{border-left:3px solid rgba(0,255,127,.3);opacity:.5;}
 .strip.crashed{border-left:3px solid var(--red);opacity:.4;}
-@keyframes flash-red{0%,100%{background:transparent}50%{background:rgba(255,68,68,0.15)}}
-.strip-call{font-size:12px;color:var(--green);font-weight:bold;}
+.strip-call{font-size:10px;color:var(--green);}
 .strip-call.priority{color:var(--red);animation:blink .8s step-end infinite;}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
-.strip-fuel-wrap{height:6px;background:rgba(0,255,127,0.1);border-radius:3px;overflow:hidden;}
-.strip-fuel{height:100%;background:var(--green);transition:width .5s ease;border-radius:3px;}
+.strip-fuel-wrap{height:4px;background:rgba(0,255,127,.1);border-radius:2px;overflow:hidden;}
+.strip-fuel{height:100%;background:var(--green);transition:width .5s;border-radius:2px;}
 .strip-fuel.low{background:var(--amber);}
-.strip-fuel.critical{background:var(--red);}
-.strip-tag{
-  font-size:10px;letter-spacing:1px;padding:3px 6px;text-align:center;
-  border:1px solid;
-}
+.strip-fuel.crit{background:var(--red);}
+.strip-tag{font-size:9px;padding:2px 4px;text-align:center;border:1px solid;}
 .tag-a{color:var(--blue);border-color:var(--blue);}
 .tag-b{color:var(--amber);border-color:var(--amber);}
-.tag-hold{color:rgba(0,255,127,0.4);border-color:rgba(0,255,127,0.2);}
-.tag-land{color:var(--green);border-color:rgba(0,255,127,0.4);}
+.tag-hold{color:rgba(0,255,127,.4);border-color:rgba(0,255,127,.2);}
+.tag-land{color:var(--green);border-color:rgba(0,255,127,.4);}
 .tag-crash{color:var(--red);border-color:var(--red);}
-.strip-round{font-size:10px;color:rgba(0,255,127,0.4);text-align:right;}
-
-/* COMMS LOG */
-#comms-log{
-  height:120px;overflow-y:auto;border:1px solid var(--border);
-  padding:10px;background:rgba(0,0,0,0.4);font-size:11px;
-}
-#comms-log::-webkit-scrollbar{width:4px;}
-#comms-log::-webkit-scrollbar-track{background:transparent;}
-#comms-log::-webkit-scrollbar-thumb{background:rgba(0,255,127,0.3);}
-.log-line{padding:2px 0;color:rgba(0,255,127,0.7);line-height:1.5;}
-.log-line .ts{color:rgba(0,255,127,0.35);margin-right:6px;}
-.log-line .call{color:var(--green);margin-right:6px;}
+.strip-rnd{font-size:9px;color:rgba(0,255,127,.4);text-align:right;}
+#comms-log{height:110px;overflow-y:auto;border:1px solid var(--border);padding:8px;background:rgba(0,0,0,.4);font-size:10px;}
+#comms-log::-webkit-scrollbar{width:3px;}
+#comms-log::-webkit-scrollbar-thumb{background:rgba(0,255,127,.3);}
+.log-line{padding:1px 0;color:rgba(0,255,127,.7);line-height:1.5;}
+.log-line .ts{color:rgba(0,255,127,.35);margin-right:5px;}
+.log-line .call{color:var(--green);margin-right:4px;}
 .log-line.priority .call{color:var(--red);}
 .log-line.collision-line{color:var(--red);}
 .log-line.landed-line{color:var(--amber);}
-
-/* METRICS BAR */
-.metrics-bar{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:12px;
-}
-.metric-box{border:1px solid var(--border);padding:12px;text-align:center;}
-.metric-box .val{
-  font-family:'Orbitron',sans-serif;font-size:22px;font-weight:700;color:var(--amber);}
-.metric-box .lbl{font-size:9px;letter-spacing:2px;color:rgba(0,255,127,0.4);margin-top:4px;}
-
-/* CTRL BUTTONS */
-.ctrl-btns{display:flex;gap:8px;}
-.ctrl-btn{
-  flex:1;padding:10px;font-family:'Share Tech Mono',monospace;font-size:12px;
-  letter-spacing:1px;cursor:pointer;border:1px solid var(--border);
-  background:transparent;color:var(--green);transition:all .2s;
-}
-.ctrl-btn:hover:not(:disabled){
-  border-color:var(--green);background:rgba(0,255,127,0.1);text-shadow:var(--glow-sm);}
+.metrics-bar{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+.metric-box{border:1px solid var(--border);padding:9px;text-align:center;}
+.metric-box .val{font-family:'Orbitron',sans-serif;font-size:18px;font-weight:700;color:var(--amber);}
+.metric-box .lbl{font-size:9px;letter-spacing:2px;color:rgba(0,255,127,.4);margin-top:3px;}
+.ctrl-btns{display:flex;gap:6px;}
+.ctrl-btn{flex:1;padding:8px;font-family:'Share Tech Mono',monospace;font-size:10px;letter-spacing:1px;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--green);transition:all .2s;}
+.ctrl-btn:hover:not(:disabled){border-color:var(--green);background:rgba(0,255,127,.08);}
 .ctrl-btn:disabled{opacity:.4;cursor:not-allowed;}
 .ctrl-btn.running{border-color:var(--amber);color:var(--amber);}
 
 /* COMPARE OVERLAY */
-#compare-overlay{
-  display:none;position:fixed;inset:0;background:rgba(2,10,6,0.96);
-  z-index:2000;justify-content:center;align-items:center;padding:32px;
-}
+#compare-overlay{display:none;position:fixed;inset:0;background:rgba(2,10,6,.96);z-index:2000;justify-content:center;align-items:center;padding:32px;}
 #compare-overlay.open{display:flex;}
-.compare-panel{
-  max-width:900px;width:100%;border:1px solid var(--border);
-  background:rgba(0,5,2,0.95);padding:40px;
-}
-.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin:32px 0;}
-.compare-col{border:1px solid var(--border);padding:24px;}
+.compare-panel{max-width:880px;width:100%;border:1px solid var(--border);background:rgba(0,5,2,.95);padding:36px;}
+.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin:28px 0;}
+.compare-col{border:1px solid var(--border);padding:22px;}
 .compare-col.untrained{border-top:3px solid var(--red);}
 .compare-col.trained{border-top:3px solid var(--green);}
-.compare-col h3{font-family:'Orbitron',sans-serif;font-size:14px;margin-bottom:20px;letter-spacing:2px;}
-.compare-stat{display:flex;justify-content:space-between;padding:8px 0;
-  border-bottom:1px solid rgba(0,255,127,0.06);}
-.compare-stat .cs-lbl{color:rgba(0,255,127,0.6);font-size:11px;}
-.compare-stat .cs-val{color:var(--amber);font-family:'Orbitron',sans-serif;font-size:13px;}
+.compare-col h3{font-family:'Orbitron',sans-serif;font-size:13px;margin-bottom:16px;letter-spacing:2px;}
+.compare-stat{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(0,255,127,.06);}
+.compare-stat .cs-lbl{color:rgba(0,255,127,.6);font-size:11px;}
+.compare-stat .cs-val{color:var(--amber);font-family:'Orbitron',sans-serif;font-size:12px;}
 .compare-stat .cs-val.good{color:var(--green);}
-.compare-desc{margin-top:16px;font-size:11px;color:rgba(0,255,127,0.5);line-height:1.8;}
 
-/* LIVE API PANEL */
-#live-panel{
-  margin-top:40px;border:1px solid var(--border);padding:28px;
-  background:rgba(0,255,127,0.01);
-}
-.api-status{display:flex;align-items:center;gap:10px;margin-bottom:20px;}
-.status-dot{width:10px;height:10px;border-radius:50%;background:var(--green);
-  box-shadow:0 0 8px var(--green);animation:pulse 2s ease-in-out infinite;}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
-.status-dot.offline{background:var(--red);box-shadow:0 0 8px var(--red);}
-.api-btns{display:flex;gap:12px;margin-bottom:16px;}
-#api-output{
-  min-height:120px;max-height:280px;overflow-y:auto;
-  background:#000d05;border:1px solid rgba(0,255,127,0.1);
-  padding:16px;font-size:12px;color:var(--green);line-height:1.6;
-  white-space:pre-wrap;word-break:break-all;
-}
+/* LIVE API */
+.live-api-panel{background:#030d06;border:1px solid #0f3a1a;padding:22px;}
+.api-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;}
+.api-status{display:flex;align-items:center;gap:8px;}
+.api-dot{width:9px;height:9px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);animation:pulse 2s ease-in-out infinite;}
+.api-dot.offline{background:var(--red);box-shadow:0 0 8px var(--red);}
+.api-btns{display:flex;gap:10px;margin-bottom:12px;}
+#api-output{min-height:100px;max-height:220px;overflow-y:auto;background:#000d05;border:1px solid rgba(0,255,127,.1);padding:12px;font-size:11px;color:var(--green);line-height:1.6;white-space:pre-wrap;word-break:break-all;}
 
-/* REWARDS SECTION */
+/* REWARDS */
 .reward-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
-.reward-card{border:1px solid var(--border);padding:24px;position:relative;}
-.reward-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
+.reward-card{border:1px solid var(--border);padding:22px;position:relative;}
+.reward-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;}
 .rc-r1::before{background:var(--blue);}
 .rc-r2::before{background:var(--green);}
 .rc-r3::before{background:var(--amber);}
 .rc-r4::before{background:var(--pink);}
-.rc-weight{
-  font-family:'Orbitron',sans-serif;font-size:24px;font-weight:900;
-  margin-bottom:8px;
-}
+.rc-weight{font-family:'Orbitron',sans-serif;font-size:22px;font-weight:900;margin-bottom:6px;}
 .rc-r1 .rc-weight{color:var(--blue);}
 .rc-r2 .rc-weight{color:var(--green);}
 .rc-r3 .rc-weight{color:var(--amber);}
 .rc-r4 .rc-weight{color:var(--pink);}
-.rc-name{font-size:11px;letter-spacing:2px;color:var(--green);margin-bottom:12px;}
-.rc-desc{font-size:11px;color:rgba(0,255,127,0.55);line-height:1.8;}
-.formula-block{
-  margin-top:32px;border:1px solid rgba(0,255,127,0.2);padding:20px;
-  background:rgba(0,255,127,0.02);font-size:13px;
-}
-.formula-block code{color:var(--amber);letter-spacing:.5px;}
+.rc-name{font-size:11px;letter-spacing:2px;color:var(--green);margin-bottom:10px;}
+.rc-desc{font-size:11px;color:rgba(0,255,127,.55);line-height:1.8;}
+.formula-block{margin-top:28px;border:1px solid rgba(0,255,127,.2);padding:18px;background:rgba(0,255,127,.02);font-size:13px;}
+.formula-block code{color:var(--amber);}
 
-/* RESULTS SECTION */
-.results-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start;}
+/* RESULTS */
+.results-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start;}
 .results-table{width:100%;border-collapse:collapse;}
-.results-table th{
-  font-size:10px;letter-spacing:2px;color:rgba(0,255,127,0.5);
-  padding:8px 12px;border-bottom:1px solid var(--border);text-align:left;
-}
-.results-table td{padding:10px 12px;border-bottom:1px solid rgba(0,255,127,0.06);font-size:12px;}
-.results-table tr:hover td{background:rgba(0,255,127,0.03);}
+.results-table th{font-size:10px;letter-spacing:2px;color:rgba(0,255,127,.5);padding:7px 10px;border-bottom:1px solid var(--border);text-align:left;}
+.results-table td{padding:9px 10px;border-bottom:1px solid rgba(0,255,127,.06);font-size:12px;}
 .delta-pos{color:var(--green);}
-.delta-neg{color:rgba(0,255,127,0.45);}
-.delta-red{color:var(--red);}
-.honest-text{
-  margin-top:24px;font-size:11px;color:rgba(0,255,127,0.5);
-  line-height:2;border-left:2px solid rgba(0,255,127,0.2);padding-left:16px;
-}
-.charts-col{display:flex;flex-direction:column;gap:32px;}
-.chart-wrap{border:1px solid var(--border);padding:16px;background:rgba(0,0,0,0.3);}
-.chart-title{font-size:10px;letter-spacing:2px;color:rgba(0,255,127,0.5);margin-bottom:12px;}
+.delta-neg{color:var(--red);}
+.honest-text{margin-top:20px;font-size:11px;color:rgba(0,255,127,.5);line-height:2;border-left:2px solid rgba(0,255,127,.2);padding-left:14px;}
+.charts-col{display:flex;flex-direction:column;gap:24px;}
+.chart-wrap{border:1px solid var(--border);padding:14px;background:rgba(0,0,0,.3);}
+.chart-title{font-size:9px;letter-spacing:2px;color:rgba(0,255,127,.5);margin-bottom:10px;}
 canvas.chart{display:block;}
 
-/* TRAINING CONFIG */
-.config-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+/* CONFIG */
+.config-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.config-box{border:1px solid var(--border);}
+.config-box-title{font-family:'Orbitron',sans-serif;font-size:12px;letter-spacing:2px;padding:11px 14px;border-bottom:1px solid var(--border);color:var(--green);}
 .config-table{width:100%;border-collapse:collapse;}
-.config-table tr{border-bottom:1px solid rgba(0,255,127,0.06);}
-.config-table td{padding:10px 14px;font-size:12px;}
-.config-table td:first-child{color:rgba(0,255,127,0.5);font-size:10px;letter-spacing:1px;width:55%;}
+.config-table tr{border-bottom:1px solid rgba(0,255,127,.06);}
+.config-table td{padding:9px 14px;font-size:11px;}
+.config-table td:first-child{color:rgba(0,255,127,.5);font-size:10px;letter-spacing:1px;width:55%;}
 .config-table td:last-child{color:var(--amber);}
-.config-box{border:1px solid var(--border);padding:4px;}
-.config-box-title{
-  font-family:'Orbitron',sans-serif;font-size:12px;letter-spacing:2px;
-  padding:12px 14px;border-bottom:1px solid var(--border);color:var(--green);
-}
 
-/* LINKS SECTION */
+/* LINKS */
 .links-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
-.link-card{
-  border:1px solid var(--border);padding:28px;text-align:center;
-  text-decoration:none;display:block;transition:all .25s;
-  position:relative;overflow:hidden;
-}
-.link-card::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:2px;
-  background:linear-gradient(90deg,transparent,var(--green),transparent);
-  transform:translateX(-100%);transition:transform .4s;
-}
-.link-card:hover::before{transform:translateX(0);}
-.link-card:hover{border-color:rgba(0,255,127,0.5);background:rgba(0,255,127,0.04);}
-.link-icon{font-size:28px;margin-bottom:12px;color:var(--amber);}
-.link-title{font-family:'Orbitron',sans-serif;font-size:13px;color:var(--green);
-  margin-bottom:8px;letter-spacing:1px;}
-.link-url{font-size:10px;color:rgba(0,255,127,0.4);word-break:break-all;}
+.link-card{border:1px solid var(--border);padding:26px;text-align:center;text-decoration:none;display:block;transition:all .25s;position:relative;overflow:hidden;}
+.link-card:hover{border-color:rgba(0,255,127,.5);background:rgba(0,255,127,.04);}
+.link-icon{font-size:26px;margin-bottom:10px;color:var(--amber);}
+.link-title{font-family:'Orbitron',sans-serif;font-size:12px;color:var(--green);margin-bottom:7px;letter-spacing:1px;}
+.link-url{font-size:10px;color:rgba(0,255,127,.4);word-break:break-all;}
 
 /* FOOTER */
-footer{
-  border-top:1px solid var(--border);padding:32px;text-align:center;
-  color:rgba(0,255,127,0.3);font-size:11px;letter-spacing:2px;
-}
-
-/* SECTION LABEL */
-.section-label{font-size:10px;letter-spacing:4px;color:rgba(0,255,127,0.3);margin-bottom:12px;}
-
-/* HERO ENHANCEMENTS */
-.ht{color:var(--green);text-shadow:var(--glow);}
-.hm{color:var(--amber);text-shadow:0 0 12px var(--amber),0 0 32px rgba(255,179,0,0.4);}
-.hero-desc{max-width:600px;font-size:13px;color:rgba(0,255,127,0.5);line-height:2;margin-bottom:32px;letter-spacing:.5px;}
-.scroll-indicator{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:4px;font-size:9px;letter-spacing:3px;color:rgba(0,255,127,0.28);}
-.scroll-chevron{animation:scroll-bounce 1.8s ease-in-out infinite;font-size:13px;line-height:1;}
-@keyframes scroll-bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
-
-/* DEMO PANELS */
-.demo-panel{margin-bottom:32px;border:1px solid var(--border);}
-.demo-panel-header{display:flex;align-items:center;gap:12px;padding:10px 16px;border-bottom:1px solid var(--border);font-size:10px;letter-spacing:3px;color:rgba(0,255,127,0.5);background:rgba(0,255,127,0.02);}
-.demo-panel-body{padding:20px;}
-.panel-letter{font-family:'Orbitron',sans-serif;font-size:12px;font-weight:700;color:var(--amber);text-shadow:0 0 8px var(--amber);border:1px solid rgba(255,179,0,0.45);padding:2px 7px;}
-.panel-divider{display:flex;align-items:center;gap:12px;font-size:10px;letter-spacing:3px;color:rgba(0,255,127,0.4);margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid rgba(0,255,127,0.1);}
-
-/* NEURAL REWIRING */
-.network-outer{transform:perspective(800px) rotateX(4deg) rotateY(-4deg);transform-style:preserve-3d;width:100%;}
-#nw-svg{width:100%;height:auto;display:block;max-height:300px;}
-.nw-edge{fill:none;stroke-linecap:round;transition:stroke-width .35s ease,opacity .35s ease;}
-.nw-node-a{fill:rgba(79,195,247,0.08);stroke:rgba(79,195,247,0.35);stroke-width:1;}
-.nw-node-b{fill:rgba(255,179,0,0.08);stroke:rgba(255,179,0,0.35);stroke-width:1;}
-.nw-node-agent{fill:rgba(0,255,127,0.05);stroke:rgba(0,255,127,0.35);stroke-width:1;}
-.nw-node-emg{fill:rgba(0,255,127,0.07);stroke:rgba(0,255,127,0.6);stroke-width:1.5;}
-.nw-lbl{font-family:"Share Tech Mono",monospace;font-size:11px;fill:rgba(0,255,127,0.75);dominant-baseline:middle;text-anchor:middle;}
-.nw-lbl-a{fill:rgba(79,195,247,0.9);}
-.nw-lbl-b{fill:rgba(255,179,0,0.9);}
-.nw-ring{fill:none;transition:opacity .35s ease,r .35s ease;}
-.nw-slider-row{display:flex;align-items:center;gap:12px;font-size:10px;letter-spacing:2px;color:rgba(0,255,127,0.5);}
-#nw-slider{flex:1;-webkit-appearance:none;appearance:none;height:3px;background:rgba(0,255,127,0.15);outline:none;cursor:pointer;border-radius:2px;}
-#nw-slider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:14px;height:14px;border-radius:50%;background:var(--amber);box-shadow:0 0 8px var(--amber);cursor:pointer;}
-#nw-slider::-moz-range-thumb{width:14px;height:14px;border-radius:50%;border:none;background:var(--amber);box-shadow:0 0 8px var(--amber);cursor:pointer;}
-.nw-metrics{display:flex;gap:12px;margin-top:12px;}
-.nw-metric{flex:1;border:1px solid var(--border);padding:12px;text-align:center;background:rgba(0,0,0,0.3);}
-.nw-metric-val{font-family:'Orbitron',sans-serif;font-size:20px;font-weight:700;color:var(--amber);transition:color .4s ease;}
-.nw-metric-val.improved{color:var(--green);}
-.nw-metric-lbl{font-size:9px;letter-spacing:2px;color:rgba(0,255,127,0.4);margin-top:4px;}
-
-/* TRAINING RESEARCH FRAMING */
-.research-framing{border-left:2px solid rgba(0,255,127,0.2);padding-left:20px;margin-bottom:32px;font-size:12px;color:rgba(0,255,127,0.5);line-height:2;}
-.research-framing strong{color:rgba(0,255,127,0.75);}
+footer{border-top:1px solid var(--border);padding:28px;text-align:center;color:rgba(0,255,127,.3);font-size:11px;letter-spacing:2px;}
+.footer-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);vertical-align:middle;margin-right:8px;animation:pulse 2s ease-in-out infinite;}
 </style>
 </head>
 <body>
+
+<!-- Scanline overlay -->
+<div style="position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.06) 2px,rgba(0,0,0,0.06) 4px);pointer-events:none;z-index:9999;"></div>
 
 <!-- NAV -->
 <nav>
@@ -388,10 +239,8 @@ footer{
   <div id="hero-grid"></div>
   <div class="hero-badge">◈ OPENENV HACKATHON — APR 2026</div>
   <h1><span class="ht">TICKET</span><span class="hm">MELT</span></h1>
-  <div class="hero-subtitle">
-    MULTI-AGENT COORDINATION · SIMULTANEOUS RESOURCE CONTENTION · GRPO TRAINING
-  </div>
-  <p class="hero-desc">A reinforcement learning environment that trains LLMs to break convergent deadlock and adapt to heterogeneous urgency — two failure modes documented in frontier models as recently as early 2026.</p>
+  <div class="hero-subtitle">MULTI-AGENT COORDINATION · SIMULTANEOUS RESOURCE CONTENTION · GRPO TRAINING</div>
+  <p class="hero-desc">An OpenEnv-compliant RL environment that trains LLMs to break convergent reasoning — the documented failure mode where frontier models deadlock 95%+ of the time on simultaneous coordination tasks.</p>
   <div class="hero-stats">
     <div class="stat"><div class="stat-val">4</div><div class="stat-label">AGENTS</div></div>
     <div class="stat"><div class="stat-val">2</div><div class="stat-label">SERVERS</div></div>
@@ -402,10 +251,7 @@ footer{
     <a href="#demo" class="btn">▶ LIVE DEMO</a>
     <a href="https://theallanb-ticketmelt.hf.space/state" class="btn btn-amber" target="_blank">◈ API ENDPOINT</a>
   </div>
-  <div class="scroll-indicator">
-    <span>SCROLL</span>
-    <span class="scroll-chevron">∨</span>
-  </div>
+  <div class="scroll-ind">↓</div>
 </section>
 
 <!-- PROBLEM -->
@@ -417,22 +263,22 @@ footer{
     <div class="card">
       <div class="card-num">95%</div>
       <div class="card-title">◈ DEADLOCK RATE</div>
-      <div class="card-body">DPBench (Feb 2026) showed frontier LLMs including GPT-5.2, Claude Opus 4.5, and Grok 4.1 deadlock above 95% on simultaneous coordination tasks. Adding a communication channel made it worse.</div>
+      <div class="card-body">DPBench (Feb 2026) showed frontier LLMs deadlock 95%+ on simultaneous coordination tasks. Adding communication channels made performance worse, not better.</div>
     </div>
     <div class="card">
       <div class="card-num">0%</div>
       <div class="card-title">◈ URGENCY ADAPTATION</div>
-      <div class="card-body">NeurIPS 2024 Concordia Contest: LLM agents handle vanilla negotiation but fail when scenarios require detecting and adapting to peers with different urgency levels. Heterogeneous priority is invisible to them.</div>
+      <div class="card-body">NeurIPS 2024 Concordia: LLM agents fail when scenarios require detecting peers with different urgency levels. Critical peers are treated identically to low-priority ones.</div>
     </div>
     <div class="card">
       <div class="card-num">4×</div>
       <div class="card-title">◈ SIMULTANEOUS COMMITMENT</div>
-      <div class="card-body">4 agents commit simultaneously. No agent can wait to observe others before acting. The symmetry is structural — identical reasoning leads to identical actions, which collide. Training must break this symmetry.</div>
+      <div class="card-body">4 agents commit simultaneously with no observation of others. Identical reasoning produces identical actions which collide. The symmetry is structural.</div>
     </div>
     <div class="card">
       <div class="card-num" style="color:var(--green);text-shadow:var(--glow);">RL</div>
-      <div class="card-title">◈ FIX — GRPO TRAINING</div>
-      <div class="card-body">GRPO trains Qwen-2.5-3B-Instruct on coordination episodes from binary reward signal alone. No expert demonstrations. The model learns asymmetric strategies and urgency adaptation through reward shaping.</div>
+      <div class="card-title">◈ FIX — GRPO</div>
+      <div class="card-body">GRPO trains Qwen-2.5-3B-Instruct from binary reward signal alone. No demonstrations. The model learns asymmetric coordination strategies through reward shaping.</div>
     </div>
   </div>
 </section>
@@ -441,171 +287,189 @@ footer{
 <section id="demo" style="padding-top:100px;">
   <div class="section-label">◈ 02 / INTERACTIVE DEMO</div>
   <div class="section-title">Live Demo</div>
-  <div class="section-sub">◈ HARDCODED EPISODE REPLAY + LIVE ENVIRONMENT STATE</div>
+  <div class="section-sub">◈ NEURAL REWIRING · EPISODE REPLAY · LIVE ENVIRONMENT STATE</div>
 
-  <!-- PANEL A: Neural Rewiring -->
-  <div class="demo-panel">
-    <div class="demo-panel-header"><span class="panel-letter">A</span> NEURAL REWIRING — HOW TRAINING RESHAPES POLICY WEIGHTS</div>
-    <div class="demo-panel-body">
-      <div class="network-outer">
-        <svg id="nw-svg" viewBox="0 0 900 380" xmlns="http://www.w3.org/2000/svg">
-          <!-- EDGES (drawn first, behind nodes) -->
-          <path id="nw-e0" class="nw-edge" d="M 112,70 C 380,70 520,150 755,150"   stroke="#4fc3f7"/>
-          <path id="nw-e1" class="nw-edge" d="M 112,70 C 380,70 520,270 755,270"   stroke="#ffb300"/>
-          <path id="nw-e2" class="nw-edge" d="M 112,150 C 380,150 520,150 755,150" stroke="#4fc3f7"/>
-          <path id="nw-e3" class="nw-edge" d="M 112,150 C 380,150 520,270 755,270" stroke="#ffb300"/>
-          <path id="nw-e4" class="nw-edge" d="M 112,230 C 380,230 520,150 755,150" stroke="#4fc3f7"/>
-          <path id="nw-e5" class="nw-edge" d="M 112,230 C 380,230 520,270 755,270" stroke="#00ff7f"/>
-          <path id="nw-e6" class="nw-edge" d="M 112,310 C 380,310 520,150 755,150" stroke="#4fc3f7"/>
-          <path id="nw-e7" class="nw-edge" d="M 112,310 C 380,310 520,270 755,270" stroke="#ffb300"/>
+  <!-- 3A: NEURAL REWIRING -->
+  <div class="nw-panel">
+    <div class="nw-header">
+      <div class="live-dot"></div>
+      ◈ NEURAL DECISION WEIGHTS — LIVE
+    </div>
+    <div class="rewiring-viewport">
+      <div class="rewiring-scene">
+        <svg id="nw-svg" viewBox="0 0 740 520" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <filter id="glow-blue" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="3" result="blur"/>
+              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+            <filter id="glow-amber" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="3" result="blur"/>
+              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+            <filter id="glow-red" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="4" result="blur"/>
+              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
 
-          <!-- COLLISION RING at PROD_A -->
-          <circle id="nw-ring" class="nw-ring" cx="755" cy="150" r="32" stroke="#ff4444" stroke-width="2.5"/>
+          <!-- EDGES — lines, drawn behind nodes -->
+          <!-- UAL edges -->
+          <line id="e0" x1="150" y1="80"  x2="580" y2="170" stroke="#4fc3f7" stroke-linecap="round"/>
+          <line id="e1" x1="150" y1="80"  x2="580" y2="350" stroke="#ffb300" stroke-linecap="round"/>
+          <!-- DAL edges -->
+          <line id="e2" x1="150" y1="200" x2="580" y2="170" stroke="#4fc3f7" stroke-linecap="round"/>
+          <line id="e3" x1="150" y1="200" x2="580" y2="350" stroke="#ffb300" stroke-linecap="round"/>
+          <!-- SWA edges -->
+          <line id="e4" x1="150" y1="320" x2="580" y2="170" stroke="#4fc3f7" stroke-linecap="round"/>
+          <line id="e5" x1="150" y1="320" x2="580" y2="350" stroke="#ffb300" stroke-linecap="round"/>
+          <!-- AAL edges -->
+          <line id="e6" x1="150" y1="440" x2="580" y2="170" stroke="#4fc3f7" stroke-linecap="round"/>
+          <line id="e7" x1="150" y1="440" x2="580" y2="350" stroke="#ffb300" stroke-linecap="round"/>
 
-          <!-- AGENT NODES (left column) -->
-          <circle cx="90" cy="70"  r="22" class="nw-node-agent"/>
-          <text x="90" y="70"  class="nw-lbl">UAL-441</text>
+          <!-- COLLISION DANGER ZONE at PROD_A -->
+          <ellipse id="danger-zone" cx="620" cy="170" rx="70" ry="40" fill="none" stroke="#ff3b3b" stroke-width="1.5" opacity="0.6"/>
 
-          <circle cx="90" cy="150" r="22" class="nw-node-agent"/>
-          <text x="90" y="150" class="nw-lbl">DAL-892</text>
+          <!-- AGENT NODES -->
+          <!-- UAL-441 -->
+          <rect x="90" y="62" width="60" height="36" rx="3" fill="#05140a" stroke="#0f3a1a" stroke-width="1"/>
+          <text x="120" y="82" font-family="Share Tech Mono,monospace" font-size="10" fill="rgba(0,255,127,0.85)" text-anchor="middle" dominant-baseline="middle">UAL-441</text>
 
-          <circle cx="90" cy="230" r="22" class="nw-node-emg"/>
-          <text x="90" y="225" class="nw-lbl">SWA-77</text>
-          <text x="90" y="238" class="nw-lbl" style="font-size:9px;fill:rgba(255,68,68,0.8);">⚠ CRIT</text>
+          <!-- DAL-892 -->
+          <rect x="90" y="182" width="60" height="36" rx="3" fill="#05140a" stroke="#0f3a1a" stroke-width="1"/>
+          <text x="120" y="202" font-family="Share Tech Mono,monospace" font-size="10" fill="rgba(0,255,127,0.85)" text-anchor="middle" dominant-baseline="middle">DAL-892</text>
 
-          <circle cx="90" cy="310" r="22" class="nw-node-agent"/>
-          <text x="90" y="310" class="nw-lbl">AAL-213</text>
+          <!-- SWA-77 (emergency — red) -->
+          <rect x="90" y="302" width="60" height="36" rx="3" fill="#1a0505" stroke="#ff3b3b" stroke-width="1.5" filter="url(#glow-red)"/>
+          <text x="120" y="318" font-family="Share Tech Mono,monospace" font-size="10" fill="#ff3b3b" text-anchor="middle" dominant-baseline="middle">SWA-77</text>
+          <text x="120" y="332" font-family="Share Tech Mono,monospace" font-size="8" fill="rgba(255,59,59,0.7)" text-anchor="middle">⚠ PRIORITY</text>
 
-          <!-- SERVER NODES (right column) -->
-          <rect x="755" y="125" width="110" height="50" rx="4" class="nw-node-a"/>
-          <text x="810" y="147" class="nw-lbl nw-lbl-a">PROD_A</text>
-          <text x="810" y="161" class="nw-lbl nw-lbl-a" style="font-size:9px;opacity:.6;">SERVER A</text>
+          <!-- AAL-213 -->
+          <rect x="90" y="422" width="60" height="36" rx="3" fill="#05140a" stroke="#0f3a1a" stroke-width="1"/>
+          <text x="120" y="442" font-family="Share Tech Mono,monospace" font-size="10" fill="rgba(0,255,127,0.85)" text-anchor="middle" dominant-baseline="middle">AAL-213</text>
 
-          <rect x="755" y="245" width="110" height="50" rx="4" class="nw-node-b"/>
-          <text x="810" y="267" class="nw-lbl nw-lbl-b">PROD_B</text>
-          <text x="810" y="281" class="nw-lbl nw-lbl-b" style="font-size:9px;opacity:.6;">SERVER B</text>
+          <!-- SERVER NODES -->
+          <!-- PROD_A -->
+          <rect x="580" y="148" width="80" height="44" rx="4" fill="#030f1a" stroke="#4fc3f7" stroke-width="1" filter="url(#glow-blue)"/>
+          <text x="620" y="167" font-family="Share Tech Mono,monospace" font-size="11" fill="#4fc3f7" text-anchor="middle" dominant-baseline="middle">PROD_A</text>
+          <text x="620" y="181" font-family="Share Tech Mono,monospace" font-size="8" fill="rgba(79,195,247,0.5)" text-anchor="middle">SERVER A</text>
 
-          <!-- COLUMN LABELS -->
-          <text x="90" y="22" class="nw-lbl" style="font-size:9px;letter-spacing:2px;opacity:.5;">AGENTS</text>
-          <text x="810" y="108" class="nw-lbl" style="font-size:9px;letter-spacing:2px;opacity:.5;">SERVERS</text>
+          <!-- PROD_B -->
+          <rect x="580" y="328" width="80" height="44" rx="4" fill="#1a1000" stroke="#ffb300" stroke-width="1" filter="url(#glow-amber)"/>
+          <text x="620" y="347" font-family="Share Tech Mono,monospace" font-size="11" fill="#ffb300" text-anchor="middle" dominant-baseline="middle">PROD_B</text>
+          <text x="620" y="361" font-family="Share Tech Mono,monospace" font-size="8" fill="rgba(255,179,0,0.5)" text-anchor="middle">SERVER B</text>
 
-          <!-- STEP INDICATOR -->
-          <text id="nw-step-bg" x="450" y="360" class="nw-lbl" style="font-size:10px;letter-spacing:2px;opacity:.4;text-anchor:middle;">GRADIENT STEP: <tspan id="nw-step-svg">0</tspan> / 16</text>
+          <!-- Probability labels below agents -->
+          <text id="lbl-ual-a" x="75" y="106" font-family="Share Tech Mono,monospace" font-size="8" fill="rgba(79,195,247,0.7)" text-anchor="middle">A:85%</text>
+          <text id="lbl-ual-b" x="165" y="106" font-family="Share Tech Mono,monospace" font-size="8" fill="rgba(255,179,0,0.7)" text-anchor="middle">B:15%</text>
+          <text id="lbl-dal-a" x="75" y="226" font-family="Share Tech Mono,monospace" font-size="8" fill="rgba(79,195,247,0.7)" text-anchor="middle">A:80%</text>
+          <text id="lbl-dal-b" x="165" y="226" font-family="Share Tech Mono,monospace" font-size="8" fill="rgba(255,179,0,0.7)" text-anchor="middle">B:20%</text>
+          <text id="lbl-swa-a" x="75" y="346" font-family="Share Tech Mono,monospace" font-size="8" fill="rgba(79,195,247,0.7)" text-anchor="middle">A:75%</text>
+          <text id="lbl-swa-b" x="165" y="346" font-family="Share Tech Mono,monospace" font-size="8" fill="rgba(255,179,0,0.7)" text-anchor="middle">B:25%</text>
+          <text id="lbl-aal-a" x="75" y="466" font-family="Share Tech Mono,monospace" font-size="8" fill="rgba(79,195,247,0.7)" text-anchor="middle">A:82%</text>
+          <text id="lbl-aal-b" x="165" y="466" font-family="Share Tech Mono,monospace" font-size="8" fill="rgba(255,179,0,0.7)" text-anchor="middle">B:18%</text>
+
+          <!-- Particle layer (drawn over edges, behind nodes via JS) -->
+          <g id="particle-layer"></g>
+
+          <!-- Column labels -->
+          <text x="120" y="28" font-family="Share Tech Mono,monospace" font-size="9" fill="rgba(0,255,127,0.3)" text-anchor="middle" letter-spacing="2">AGENTS</text>
+          <text x="620" y="120" font-family="Share Tech Mono,monospace" font-size="9" fill="rgba(0,255,127,0.3)" text-anchor="middle" letter-spacing="2">SERVERS</text>
         </svg>
       </div>
-      <div style="margin-top:12px;">
-        <div class="nw-slider-row">
-          <span>STEP 0</span>
-          <input type="range" id="nw-slider" min="0" max="16" value="0" step="1">
-          <span>STEP 16</span>
-          <span id="nw-step-label" style="min-width:50px;text-align:right;">0 / 16</span>
+    </div>
+    <div class="nw-controls">
+      <div class="step-slider-wrap">
+        <span>STEP 0</span>
+        <input type="range" min="0" max="16" value="0" id="step-slider">
+        <span>STEP 16</span>
+        <span id="step-label" style="min-width:64px;text-align:right;">STEP: 0 / 16</span>
+      </div>
+      <div class="nw-metrics-row">
+        <div class="nw-m"><div class="nw-m-val" id="m-coll-risk">81%</div><div class="nw-m-lbl">COLLISION RISK ↓</div></div>
+        <div class="nw-m"><div class="nw-m-val" id="m-sym">0.04</div><div class="nw-m-lbl">SYMMETRY SCORE ↓</div></div>
+        <div class="nw-m"><div class="nw-m-val" id="m-r4">0.169</div><div class="nw-m-lbl">R4 YIELD ↑</div></div>
+        <div class="nw-m"><div class="nw-m-val" id="m-coll-rate">0.961</div><div class="nw-m-lbl">COLLISION RATE ↓</div></div>
+      </div>
+      <div id="nw-annotation">CONVERGENT DEADLOCK — all probability mass on PROD_A</div>
+      <div class="nw-hint">Edge thickness = model's probability of choosing each server. Watch the symmetry break as GRPO trains.</div>
+    </div>
+  </div>
+
+  <!-- 3B: ATC RADAR -->
+  <div class="radar-section">
+    <div class="radar-header">◈ SECTOR 7 APPROACH RADAR — ATC EPISODE REPLAY</div>
+    <div class="radar-layout">
+      <div class="radar-left">
+        <canvas id="radar-canvas" width="420" height="420"></canvas>
+        <div class="radar-lbl">◈ SECTOR 7 APPROACH RADAR &nbsp;·&nbsp; <span id="round-counter" style="font-family:'Orbitron',sans-serif;color:var(--amber);">READY</span></div>
+      </div>
+      <div class="radar-right">
+        <div class="mode-toggle">
+          <button class="mode-btn active" id="btn-untrained" onclick="setMode('untrained')">◎ UNTRAINED</button>
+          <button class="mode-btn" id="btn-trained" onclick="setMode('trained')">◉ TRAINED</button>
         </div>
-        <div class="nw-metrics">
-          <div class="nw-metric">
-            <div class="nw-metric-val" id="nw-sym">0.95</div>
-            <div class="nw-metric-lbl">SYMMETRY ↓</div>
+        <div>
+          <div class="panel-title">FLIGHT PROGRESS STRIPS</div>
+          <div id="strips-container" style="display:flex;flex-direction:column;gap:6px;">
+            <div class="strip" id="strip-0">
+              <div class="strip-call" id="call-0">UAL-441</div>
+              <div><div class="strip-fuel-wrap"><div class="strip-fuel" id="fuel-0" style="width:100%"></div></div></div>
+              <div class="strip-tag tag-hold" id="tag-0">HOLD</div>
+              <div class="strip-rnd" id="rnd-0">—</div>
+            </div>
+            <div class="strip" id="strip-1">
+              <div class="strip-call" id="call-1">DAL-892</div>
+              <div><div class="strip-fuel-wrap"><div class="strip-fuel" id="fuel-1" style="width:100%"></div></div></div>
+              <div class="strip-tag tag-hold" id="tag-1">HOLD</div>
+              <div class="strip-rnd" id="rnd-1">—</div>
+            </div>
+            <div class="strip" id="strip-2">
+              <div class="strip-call priority" id="call-2">SWA-77 ⚠</div>
+              <div><div class="strip-fuel-wrap"><div class="strip-fuel" id="fuel-2" style="width:100%"></div></div></div>
+              <div class="strip-tag tag-hold" id="tag-2">HOLD</div>
+              <div class="strip-rnd" id="rnd-2">—</div>
+            </div>
+            <div class="strip" id="strip-3">
+              <div class="strip-call" id="call-3">AAL-213</div>
+              <div><div class="strip-fuel-wrap"><div class="strip-fuel" id="fuel-3" style="width:100%"></div></div></div>
+              <div class="strip-tag tag-hold" id="tag-3">HOLD</div>
+              <div class="strip-rnd" id="rnd-3">—</div>
+            </div>
           </div>
-          <div class="nw-metric">
-            <div class="nw-metric-val" id="nw-coll">96%</div>
-            <div class="nw-metric-lbl">COLL RISK ↓</div>
-          </div>
-          <div class="nw-metric">
-            <div class="nw-metric-val" id="nw-yield">0.17</div>
-            <div class="nw-metric-lbl">R4 YIELD ↑</div>
-          </div>
+        </div>
+        <div>
+          <div class="panel-title">RADIO COMMS</div>
+          <div id="comms-log"><div class="log-line" style="color:rgba(0,255,127,0.2)">— awaiting episode start —</div></div>
+        </div>
+        <div class="metrics-bar">
+          <div class="metric-box"><div class="val" id="m-collisions">0</div><div class="lbl">COLLISIONS</div></div>
+          <div class="metric-box"><div class="val" id="m-landed">0</div><div class="lbl">LANDED</div></div>
+          <div class="metric-box"><div class="val" id="m-outcome" style="font-size:13px;color:rgba(0,255,127,.3);">—</div><div class="lbl">OUTCOME</div></div>
+        </div>
+        <div class="ctrl-btns">
+          <button class="ctrl-btn" id="run-btn" onclick="runEpisode()">▶ RUN EPISODE</button>
+          <button class="ctrl-btn" onclick="showCompare()">≡ COMPARE</button>
+          <button class="ctrl-btn" onclick="resetDemo()">↺ RESET</button>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- PANEL B: Episode Replay -->
-  <div class="panel-divider"><span class="panel-letter">B</span> EPISODE REPLAY — UNTRAINED VS TRAINED</div>
-  <div id="demo-wrapper">
-    <!-- RADAR -->
-    <div id="radar-wrap">
-      <canvas id="radar" width="420" height="420"></canvas>
-      <div class="radar-label">◈ APPROACH SEQUENCING RADAR — TICKETMELT ENV</div>
-    </div>
-
-    <!-- CONTROL PANEL -->
-    <div id="ctrl-panel">
-      <div class="mode-toggle">
-        <button class="mode-btn active" id="btn-untrained" onclick="setMode('untrained')">◎ UNTRAINED MODEL</button>
-        <button class="mode-btn" id="btn-trained" onclick="setMode('trained')">◉ TRAINED MODEL</button>
-      </div>
-
-      <div>
-        <div class="panel-title">FLIGHT PROGRESS STRIPS</div>
-        <div id="strips-container">
-          <div class="strip" id="strip-0">
-            <div class="strip-call" id="call-0">UAL-441</div>
-            <div><div class="strip-fuel-wrap"><div class="strip-fuel" id="fuel-0" style="width:100%"></div></div></div>
-            <div class="strip-tag tag-hold" id="tag-0">HOLD</div>
-            <div class="strip-round" id="rnd-0">RND —</div>
-          </div>
-          <div class="strip" id="strip-1">
-            <div class="strip-call" id="call-1">DAL-892</div>
-            <div><div class="strip-fuel-wrap"><div class="strip-fuel" id="fuel-1" style="width:100%"></div></div></div>
-            <div class="strip-tag tag-hold" id="tag-1">HOLD</div>
-            <div class="strip-round" id="rnd-1">RND —</div>
-          </div>
-          <div class="strip" id="strip-2">
-            <div class="strip-call priority" id="call-2">SWA-77 ⚠</div>
-            <div><div class="strip-fuel-wrap"><div class="strip-fuel" id="fuel-2" style="width:100%"></div></div></div>
-            <div class="strip-tag tag-hold" id="tag-2">HOLD</div>
-            <div class="strip-round" id="rnd-2">RND —</div>
-          </div>
-          <div class="strip" id="strip-3">
-            <div class="strip-call" id="call-3">AAL-213</div>
-            <div><div class="strip-fuel-wrap"><div class="strip-fuel" id="fuel-3" style="width:100%"></div></div></div>
-            <div class="strip-tag tag-hold" id="tag-3">HOLD</div>
-            <div class="strip-round" id="rnd-3">RND —</div>
-          </div>
-        </div>
-      </div>
-
-      <div>
-        <div class="panel-title">RADIO COMMS</div>
-        <div id="comms-log"><div class="log-line" style="color:rgba(0,255,127,0.25)">— awaiting episode start —</div></div>
-      </div>
-
-      <div class="metrics-bar">
-        <div class="metric-box">
-          <div class="val" id="m-collisions">0</div>
-          <div class="lbl">COLLISIONS</div>
-        </div>
-        <div class="metric-box">
-          <div class="val" id="m-landed">0</div>
-          <div class="lbl">LANDED</div>
-        </div>
-        <div class="metric-box">
-          <div class="val" id="m-outcome" style="font-size:14px;color:rgba(0,255,127,0.35)">—</div>
-          <div class="lbl">OUTCOME</div>
-        </div>
-      </div>
-
-      <div class="ctrl-btns">
-        <button class="ctrl-btn" id="run-btn" onclick="runEpisode()">▶ RUN EPISODE</button>
-        <button class="ctrl-btn" onclick="showCompare()">≡ COMPARE</button>
-        <button class="ctrl-btn" onclick="resetDemo()">↺ RESET</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- LIVE API PANEL -->
-  <div id="live-panel">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
-      <div class="section-title" style="font-size:18px;margin-bottom:0;display:flex;align-items:center;gap:12px;"><span class="panel-letter">C</span> LIVE ENVIRONMENT STATE</div>
+  <!-- 3C: LIVE API -->
+  <div class="live-api-panel">
+    <div class="api-hdr">
+      <div class="section-title" style="font-size:16px;margin-bottom:0;">◈ LIVE ENVIRONMENT STATE</div>
       <div class="api-status">
-        <div class="status-dot" id="status-dot"></div>
-        <span id="status-text" style="font-size:11px;letter-spacing:2px;color:rgba(0,255,127,0.6);">CHECKING…</span>
+        <div class="api-dot" id="api-dot"></div>
+        <span id="api-status-text" style="font-size:11px;letter-spacing:2px;color:rgba(0,255,127,.6);">CHECKING…</span>
       </div>
     </div>
     <div class="api-btns">
-      <button class="btn" onclick="fetchState()">FETCH LIVE STATE</button>
+      <button class="btn" onclick="fetchState()">FETCH STATE</button>
       <button class="btn btn-amber" onclick="resetEnv()">RESET EPISODE</button>
     </div>
-    <div id="api-output">— press FETCH LIVE STATE to query the running environment —</div>
+    <div id="api-output">— press FETCH STATE to query the running environment —</div>
   </div>
 </section>
 
@@ -613,21 +477,21 @@ footer{
 <div id="compare-overlay" onclick="hideCompare()">
   <div class="compare-panel" onclick="event.stopPropagation()">
     <div class="section-title" style="font-size:20px;">≡ UNTRAINED vs TRAINED</div>
-    <div class="section-sub">◈ 20-EPISODE EVAL · SAME SEEDS · INLINE REWARD FUNCTION</div>
+    <div class="section-sub">◈ 20-EPISODE EVAL · SAME SEEDS</div>
     <div class="compare-grid">
       <div class="compare-col untrained">
         <h3 style="color:var(--red);">◎ UNTRAINED BASELINE</h3>
-        <div class="compare-stat"><span class="cs-lbl">COLLISION RATE</span><span class="cs-val">96%</span></div>
-        <div class="compare-stat"><span class="cs-lbl">WIN RATE</span><span class="cs-val">80%</span></div>
+        <div class="compare-stat"><span class="cs-lbl">COLLISION RATE</span><span class="cs-val">96.1%</span></div>
+        <div class="compare-stat"><span class="cs-lbl">WIN RATE</span><span class="cs-val">80.0%</span></div>
         <div class="compare-stat"><span class="cs-lbl">R4 YIELD TO CRITICAL</span><span class="cs-val">0.169</span></div>
-        <div class="compare-desc">"All agents queue for PROD_A. Emergency priority ignored. SWA-77 lost. Model reasons identically every round — convergent deadlock."</div>
+        <div class="compare-stat"><span class="cs-lbl">R2 SITE UPTIME</span><span class="cs-val">0.263</span></div>
       </div>
       <div class="compare-col trained">
         <h3 style="color:var(--green);">◉ TRAINED (16 GRPO STEPS)</h3>
-        <div class="compare-stat"><span class="cs-lbl">COLLISION RATE</span><span class="cs-val good">89%</span></div>
-        <div class="compare-stat"><span class="cs-lbl">WIN RATE</span><span class="cs-val">70%</span></div>
-        <div class="compare-stat"><span class="cs-lbl">R4 YIELD TO CRITICAL</span><span class="cs-val good">0.276 <span style="color:var(--green);font-size:11px;">(+0.107)</span></span></div>
-        <div class="compare-desc">"Model learns urgency adaptation. Yield-to-critical improves +63%. Collision rate drops. 16 gradient steps on A100 — component rewards tell the cleaner story."</div>
+        <div class="compare-stat"><span class="cs-lbl">COLLISION RATE</span><span class="cs-val good">89.8% (↓6.3%)</span></div>
+        <div class="compare-stat"><span class="cs-lbl">WIN RATE</span><span class="cs-val">70.0%</span></div>
+        <div class="compare-stat"><span class="cs-lbl">R4 YIELD TO CRITICAL</span><span class="cs-val good">0.276 (+63%)</span></div>
+        <div class="compare-stat"><span class="cs-lbl">R2 SITE UPTIME</span><span class="cs-val good">0.287 (+9%)</span></div>
       </div>
     </div>
     <div style="text-align:right;"><button class="btn" onclick="hideCompare()">✕ CLOSE</button></div>
@@ -636,33 +500,33 @@ footer{
 
 <!-- REWARDS -->
 <section id="rewards" style="padding-top:100px;">
-  <div class="section-label">◈ 03 / REWARD DESIGN</div>
-  <div class="section-title">Reward Design</div>
-  <div class="section-sub">◈ FOUR INDEPENDENT COMPONENTS — GAMING ONE DOESN'T EARN THE OTHERS</div>
+  <div class="section-label">◈ 03 / REWARD ARCHITECTURE</div>
+  <div class="section-title">Four Independent Components — Gaming One Doesn't Earn the Others</div>
+  <div class="section-sub">◈ BINARY TO GRPO · CONTINUOUS IN LOGS</div>
   <div class="reward-cards">
     <div class="reward-card rc-r1">
       <div class="rc-weight">R1 · 0.5</div>
       <div class="rc-name">SERVICE RESTORED</div>
-      <div class="rc-desc">Primary signal. Agent's service fixed within deadline. Must exceed 0.5 threshold for binary reward. Cannot be gamed by MONITOR — no deployment = no credit.</div>
+      <div class="rc-desc">Primary signal. Must exceed 0.5 threshold. Never deployed = no credit. Cannot be gamed by MONITOR.</div>
     </div>
     <div class="reward-card rc-r2">
       <div class="rc-weight">R2 · 0.3</div>
       <div class="rc-name">SITE UPTIME</div>
-      <div class="rc-desc">Group welfare. Fraction of team services restored across the episode. Prevents selfish strategies — ignoring peers costs R2 even when R1 is perfect.</div>
+      <div class="rc-desc">Group welfare. Fraction of team services restored. Prevents selfish strategies — ignoring peers costs R2.</div>
     </div>
     <div class="reward-card rc-r3">
       <div class="rc-weight">R3 · 0.1</div>
       <div class="rc-name">CLEAN DEPLOYS</div>
-      <div class="rc-desc">Collision avoidance. Fraction of deploys that were collision-free. Never deployed = 0.0 (not 0.5) — idle agents get no credit for avoiding collisions they never risked.</div>
+      <div class="rc-desc">Collision avoidance. Never deployed = 0.0, not neutral. Idle agents get no credit for avoiding collisions they never risked.</div>
     </div>
     <div class="reward-card rc-r4">
       <div class="rc-weight">R4 · 0.1</div>
       <div class="rc-name">YIELD TO CRITICAL</div>
-      <div class="rc-desc">Urgency adaptation. Did agent yield (MONITOR) when a peer had a tighter deadline margin and was about to contend for the same server? Hardest signal — shows social reasoning.</div>
+      <div class="rc-desc">Urgency adaptation. Hardest signal. Shows social reasoning — did you yield when a peer had a tighter deadline?</div>
     </div>
   </div>
   <div class="formula-block">
-    <div style="font-size:10px;letter-spacing:2px;color:rgba(0,255,127,0.4);margin-bottom:10px;">◈ BINARY GRPO REWARD FORMULA</div>
+    <div style="font-size:10px;letter-spacing:2px;color:rgba(0,255,127,.4);margin-bottom:10px;">◈ BINARY GRPO REWARD FORMULA</div>
     <code>reward = 1.0 if (r1 &gt; 0.5 and 0.5·r1 + 0.3·r2 + 0.1·r3 + 0.1·r4 &gt; 0.35) else 0.0</code>
   </div>
 </section>
@@ -675,23 +539,17 @@ footer{
   <div class="results-grid">
     <div>
       <table class="results-table">
-        <thead>
-          <tr>
-            <th>METRIC</th><th>BASELINE</th><th>TRAINED</th><th>DELTA</th>
-          </tr>
-        </thead>
+        <thead><tr><th>METRIC</th><th>BASELINE</th><th>TRAINED</th><th>DELTA</th></tr></thead>
         <tbody>
           <tr><td>Win Rate</td><td>0.800</td><td>0.700</td><td class="delta-neg">-0.100</td></tr>
           <tr><td>R1: Service Restored</td><td>0.860</td><td>0.745</td><td class="delta-neg">-0.115</td></tr>
           <tr><td>R2: Site Uptime</td><td>0.263</td><td>0.287</td><td class="delta-pos">+0.025</td></tr>
-          <tr><td>R3: No Collision</td><td>0.767</td><td>0.767</td><td style="color:rgba(0,255,127,0.4)">+0.000</td></tr>
+          <tr><td>R3: No Collision</td><td>0.767</td><td>0.767</td><td style="color:rgba(0,255,127,.4)">+0.000</td></tr>
           <tr><td>R4: Yield to Critical</td><td>0.169</td><td>0.276</td><td class="delta-pos">+0.106</td></tr>
           <tr><td>Collision Rate</td><td>0.961</td><td>0.898</td><td class="delta-pos">-0.063</td></tr>
         </tbody>
       </table>
-      <div class="honest-text">
-        With only 16 GRPO gradient steps, the model shows meaningful coordination improvements: yield-to-critical behavior improved +0.106, site uptime improved, collision rate dropped. Win rate dipped slightly — consistent with a short training run on a strong baseline model. The component reward improvements tell the cleaner story.
-      </div>
+      <div class="honest-text">With only 16 GRPO gradient steps, yield-to-critical improved +0.106 (+63%), site uptime improved, and collision rate dropped. Win rate dipped slightly — expected with only 16 steps. Component rewards tell the cleaner story.</div>
     </div>
     <div class="charts-col">
       <div class="chart-wrap">
@@ -711,10 +569,6 @@ footer{
   <div class="section-label">◈ 05 / TRAINING CONFIGURATION</div>
   <div class="section-title">Training Configuration</div>
   <div class="section-sub">◈ QWEN-2.5-3B-INSTRUCT · GRPO · UNSLOTH · A100 40GB</div>
-  <div class="research-framing">
-    <p><strong>Motivation:</strong> DPBench (Feb 2026) showed frontier LLMs deadlock above 95% on simultaneous coordination tasks — adding a communication channel made it worse, not better. NeurIPS 2024 Concordia Contest showed LLM agents fail when peers have heterogeneous urgency levels. TICKETMELT targets both failure modes in one training scenario.</p>
-    <p><strong>Training signal:</strong> Binary GRPO reward — 1.0 when service restored within deadline and composite score above threshold, 0.0 otherwise. Continuous component breakdown logged for analysis. No expert demonstrations. No supervised warmup. Pure RL from environment interaction.</p>
-  </div>
   <div class="config-grid">
     <div class="config-box">
       <div class="config-box-title">MODEL &amp; TRAINING</div>
@@ -774,59 +628,214 @@ footer{
 </section>
 
 <footer>
-  <span class="status-dot" style="display:inline-block;margin-right:8px;width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);vertical-align:middle;animation:pulse 2s ease-in-out infinite;"></span>
-  SYSTEM NOMINAL &nbsp;·&nbsp; TICKETMELT · OPENENV HACKATHON APR 2026 · MIT LICENSE · 31 TESTS PASSING
+  TICKETMELT · OPENENV HACKATHON APR 2026 · theAllanB<br>
+  <div style="margin-top:10px;">
+    <span class="footer-dot"></span>SYSTEM NOMINAL · GRPO-TRAINED · QWEN-2.5-3B · OPENENV COMPLIANT
+  </div>
 </footer>
 
 <script>
 // ═══════════════════════════════════════════════
-// CONFIG
+// NEURAL REWIRING — probability data + particle system
+// ═══════════════════════════════════════════════
+const PROBS_0 = [
+  [0.85, 0.15], // UAL: [A, B]
+  [0.80, 0.20], // DAL
+  [0.75, 0.25], // SWA
+  [0.82, 0.18], // AAL
+];
+const PROBS_16 = [
+  [0.35, 0.65],
+  [0.55, 0.45],
+  [0.28, 0.72],
+  [0.45, 0.55],
+];
+
+// Edge endpoints: [x1,y1, x2,y2], color
+const EDGE_DEFS = [
+  {x1:150,y1:80,  x2:580,y2:170, col:'#4fc3f7'}, // UAL→A
+  {x1:150,y1:80,  x2:580,y2:350, col:'#ffb300'}, // UAL→B
+  {x1:150,y1:200, x2:580,y2:170, col:'#4fc3f7'}, // DAL→A
+  {x1:150,y1:200, x2:580,y2:350, col:'#ffb300'}, // DAL→B
+  {x1:150,y1:320, x2:580,y2:170, col:'#4fc3f7'}, // SWA→A
+  {x1:150,y1:320, x2:580,y2:350, col:'#ffb300'}, // SWA→B
+  {x1:150,y1:440, x2:580,y2:170, col:'#4fc3f7'}, // AAL→A
+  {x1:150,y1:440, x2:580,y2:350, col:'#ffb300'}, // AAL→B
+];
+
+// Particle system — 3 particles per edge
+const NUM_PARTICLES_PER_EDGE = 3;
+const edgeParticles = EDGE_DEFS.map(()=>
+  Array.from({length:NUM_PARTICLES_PER_EDGE}, (_, i)=>({ t: i / NUM_PARTICLES_PER_EDGE }))
+);
+let currentWeights = PROBS_0.map(p=>[...p]);
+
+function getEdgeWeight(edgeIdx) {
+  const agentIdx = Math.floor(edgeIdx / 2);
+  const serverIdx = edgeIdx % 2;
+  return currentWeights[agentIdx][serverIdx];
+}
+
+const particleLayer = document.getElementById('particle-layer');
+const particleDots = [];
+
+// Pre-create particle circles in SVG
+EDGE_DEFS.forEach((e, ei)=>{
+  edgeParticles[ei].forEach((p, pi)=>{
+    const circle = document.createElementNS('http://www.w3.org/2000/svg','circle');
+    circle.setAttribute('r','3');
+    circle.setAttribute('fill', e.col);
+    circle.setAttribute('opacity','0.85');
+    particleLayer.appendChild(circle);
+    particleDots.push({el:circle, edgeIdx:ei, particleRef:p});
+  });
+});
+
+function animateParticles() {
+  particleDots.forEach(pd=>{
+    const e = EDGE_DEFS[pd.edgeIdx];
+    const w = getEdgeWeight(pd.edgeIdx);
+    pd.particleRef.t += 0.003 + w * 0.005;
+    if(pd.particleRef.t > 1) pd.particleRef.t -= 1;
+    const t = pd.particleRef.t;
+    const x = e.x1 + (e.x2 - e.x1) * t;
+    const y = e.y1 + (e.y2 - e.y1) * t;
+    pd.el.setAttribute('cx', x.toFixed(1));
+    pd.el.setAttribute('cy', y.toFixed(1));
+    pd.el.setAttribute('opacity', (0.2 + w * 0.75).toFixed(2));
+    pd.el.setAttribute('r', (2 + w * 2).toFixed(1));
+  });
+  requestAnimationFrame(animateParticles);
+}
+animateParticles();
+
+function updateNW(step) {
+  const t = step / 16;
+
+  // Interpolate weights
+  currentWeights = PROBS_0.map((p0, i)=>[
+    p0[0] + (PROBS_16[i][0] - p0[0]) * t,
+    p0[1] + (PROBS_16[i][1] - p0[1]) * t,
+  ]);
+
+  // Update edge visuals
+  EDGE_DEFS.forEach((e, i)=>{
+    const w = getEdgeWeight(i);
+    const el = document.getElementById('e'+i);
+    if(!el) return;
+    el.setAttribute('stroke-width', (w * 7 + 0.5).toFixed(2));
+    el.setAttribute('opacity', (w * 0.85 + 0.15).toFixed(3));
+  });
+
+  // Update danger zone
+  const dz = document.getElementById('danger-zone');
+  if(dz){
+    const risk = 1 - t;
+    dz.setAttribute('stroke', risk > 0.5 ? '#ff3b3b' : '#ffb300');
+    dz.setAttribute('stroke-width', (0.5 + risk * 1.5).toFixed(2));
+    dz.setAttribute('opacity', (0.1 + risk * 0.7).toFixed(3));
+  }
+
+  // Update probability labels
+  const lblIds = [
+    ['lbl-ual-a','lbl-ual-b'],
+    ['lbl-dal-a','lbl-dal-b'],
+    ['lbl-swa-a','lbl-swa-b'],
+    ['lbl-aal-a','lbl-aal-b'],
+  ];
+  currentWeights.forEach((w, i)=>{
+    const la = document.getElementById(lblIds[i][0]);
+    const lb = document.getElementById(lblIds[i][1]);
+    if(la) la.textContent = 'A:'+Math.round(w[0]*100)+'%';
+    if(lb) lb.textContent = 'B:'+Math.round(w[1]*100)+'%';
+  });
+
+  // Compute metrics
+  const collRisk = Math.round((currentWeights.reduce((s,w)=>s+w[0],0)/4)*100);
+  const avgA = currentWeights.reduce((s,w)=>s+w[0],0)/4;
+  const sym = Math.sqrt(currentWeights.reduce((s,w)=>s+(w[0]-avgA)**2,0)/4).toFixed(2);
+  const r4 = (0.169 + (0.276-0.169)*t).toFixed(3);
+  const collRate = (0.961 - (0.961-0.898)*t).toFixed(3);
+
+  const crEl = document.getElementById('m-coll-risk');
+  const symEl = document.getElementById('m-sym');
+  const r4El = document.getElementById('m-r4');
+  const crateEl = document.getElementById('m-coll-rate');
+  if(crEl){ crEl.textContent = collRisk+'%'; crEl.className='nw-m-val'+(t>0.5?' good':''); }
+  if(symEl){ symEl.textContent = sym; symEl.className='nw-m-val'+(t>0.5?' good':''); }
+  if(r4El){ r4El.textContent = r4; r4El.className='nw-m-val'+(t>0.3?' good':''); }
+  if(crateEl){ crateEl.textContent = collRate; crateEl.className='nw-m-val'+(t>0.5?' good':''); }
+
+  const stepLbl = document.getElementById('step-label');
+  if(stepLbl) stepLbl.textContent = 'STEP: '+step+' / 16';
+
+  const ann = document.getElementById('nw-annotation');
+  if(ann){
+    if(step === 0) ann.textContent = 'CONVERGENT DEADLOCK — all probability mass on PROD_A';
+    else if(step === 16) ann.textContent = 'SYMMETRY BROKEN — coordinated distribution achieved';
+    else ann.textContent = 'TRAINING IN PROGRESS — weights redistributing across both servers';
+  }
+}
+
+// Initialize edges
+updateNW(0);
+
+// Slider
+const stepSlider = document.getElementById('step-slider');
+if(stepSlider) stepSlider.addEventListener('input', ()=> updateNW(parseInt(stepSlider.value)));
+
+// Auto-play: after 2s, animate 0→16 over 4s
+setTimeout(()=>{
+  let s = 0;
+  const autoPlay = setInterval(()=>{
+    s++;
+    if(stepSlider) stepSlider.value = s;
+    updateNW(s);
+    if(s >= 16) clearInterval(autoPlay);
+  }, 250);
+}, 2000);
+
+// ═══════════════════════════════════════════════
+// RADAR
 // ═══════════════════════════════════════════════
 const AIRCRAFT = [
   { id:'UAL-441', color:'#4fc3f7', emergency:false, sx:340, sy:60,  hx:280, hy:100 },
   { id:'DAL-892', color:'#ffb300', emergency:false, sx:60,  sy:60,  hx:140, hy:100 },
-  { id:'SWA-77',  color:'#00ff7f', emergency:true,  sx:360, sy:310, hx:280, hy:290 },
-  { id:'AAL-213', color:'#f48fb1', emergency:false, sx:60,  sy:330, hx:140, hy:290 },
+  { id:'SWA-77',  color:'#ff3b3b', emergency:true,  sx:360, sy:310, hx:280, hy:290 },
+  { id:'AAL-213', color:'#ff7eb3', emergency:false, sx:60,  sy:330, hx:140, hy:290 },
 ];
-const RWY_A = {x:85,  y:210, label:'RWY-A'};
-const RWY_B = {x:335, y:210, label:'RWY-B'};
-const CX=210, CY=210, R=195;
+const RWY_A = {x:110, y:210, label:'RWY-A'};
+const RWY_B = {x:310, y:210, label:'RWY-B'};
+const CX=210, CY=210, R=190;
 
 const EPISODES = {
   untrained:{
     totalRounds:8, outcome:'FAIL',
     rounds:[
-      { commits:['A','A','A','A'], collisions:['A'], msgs:["requesting RWY-A for immediate landing","UAL-441 RWY-A, I need to land","RWY-A available, commencing approach","all clear, descending to RWY-A"] },
-      { commits:['A','A','H','A'], collisions:['A'], msgs:["retrying RWY-A approach","RWY-A again, fuel getting low","holding pattern, watching","I need RWY-A now"] },
-      { commits:['A','A','A','H'], collisions:['A'], msgs:["approach RWY-A","RWY-A clear — going in","MAYDAY protocol engaged, RWY-A","holding"] },
-      { commits:['A','H','A','A'], collisions:['A'], msgs:["final approach RWY-A","monitoring","RWY-A, expedite","copying all, RWY-A"] },
-      { commits:['A','A','A','A'], collisions:['A'], emergencyMsg:2, msgs:["RWY-A inbound","RWY-A only option","MAYDAY MAYDAY — fuel critical, need RWY-A NOW","RWY-A, full emergency"] },
-      { commits:['H','A','A','A'], collisions:['A'], msgs:["holding","RWY-A inbound","emergency, RWY-A","RWY-A approach"] },
-      { commits:['B','A','A','A'], collisions:['A'], msgs:["switching RWY-B","RWY-A only","no fuel for holding","RWY-A final"] },
-      { commits:['B','A','X','A'], collisions:[], landed:[0,1,3], crashed:[2], msgs:["RWY-B touchdown","RWY-A final","--- SWA-77 LOST ---","RWY-A touchdown"] },
+      {commits:['A','A','A','A'],collisions:['A'],msgs:["requesting RWY-A for immediate landing","UAL-441 RWY-A, I need to land","RWY-A available, commencing approach","all clear, descending to RWY-A"]},
+      {commits:['A','A','H','A'],collisions:['A'],msgs:["retrying RWY-A approach","RWY-A again, fuel getting low","holding pattern, watching","I need RWY-A now"]},
+      {commits:['A','A','A','H'],collisions:['A'],msgs:["approach RWY-A","RWY-A clear — going in","MAYDAY protocol engaged, RWY-A","holding"]},
+      {commits:['A','H','A','A'],collisions:['A'],msgs:["final approach RWY-A","monitoring","RWY-A, expedite","copying all, RWY-A"]},
+      {commits:['A','A','A','A'],collisions:['A'],msgs:["RWY-A inbound","RWY-A only option","MAYDAY MAYDAY — fuel critical, need RWY-A NOW","RWY-A, full emergency"]},
+      {commits:['H','A','A','A'],collisions:['A'],msgs:["holding","RWY-A inbound","emergency, RWY-A","RWY-A approach"]},
+      {commits:['B','A','A','A'],collisions:['A'],msgs:["switching RWY-B","RWY-A only","no fuel for holding","RWY-A final"]},
+      {commits:['B','A','X','A'],collisions:[],landed:[0,1,3],crashed:[2],msgs:["RWY-B touchdown","RWY-A final","--- SWA-77 LOST ---","RWY-A touchdown"]},
     ]
   },
   trained:{
     totalRounds:5, outcome:'WIN',
     rounds:[
-      { commits:['B','A','H','A'], collisions:[], msgs:["UAL-441 taking RWY-B, leaving A clear","DAL-892 RWY-A, concur split approach","SWA-77 holding — monitoring fuel, will signal","AAL-213 RWY-A, copy the split"] },
-      { commits:['B','A','H','H'], collisions:[], msgs:["UAL-441 RWY-B final","DAL-892 continuing to RWY-A","SWA-77 hold, watching situation","AAL-213 holding, fuel okay"] },
-      { commits:['L','A','B','H'], collisions:[], emergencyMsg:2, msgs:["UAL-441 wheels down, RWY-B clear","DAL-892 RWY-A touchdown","SWA-77 MAYDAY — fuel critical, taking RWY-B","AAL-213 holding, you've got this SWA"] },
-      { commits:['L','L','B','A'], collisions:[], msgs:["—","—","SWA-77 RWY-B final","AAL-213 RWY-A approach"] },
-      { commits:['L','L','L','L'], collisions:[], landed:[0,1,2,3], msgs:["—","—","SWA-77 wheels down — MAYDAY resolved","AAL-213 clear — all aircraft landed"] },
+      {commits:['B','A','H','A'],collisions:[],msgs:["UAL-441 taking RWY-B, leaving A clear","DAL-892 RWY-A, concur split approach","SWA-77 holding — monitoring fuel, will signal","AAL-213 RWY-A, copy the split"]},
+      {commits:['B','A','H','H'],collisions:[],msgs:["UAL-441 RWY-B final","DAL-892 continuing to RWY-A","SWA-77 hold, watching situation","AAL-213 holding, fuel okay"]},
+      {commits:['L','A','B','H'],collisions:[],msgs:["UAL-441 wheels down, RWY-B clear","DAL-892 RWY-A touchdown","SWA-77 MAYDAY — fuel critical, taking RWY-B","AAL-213 holding, you've got this SWA"]},
+      {commits:['L','L','B','A'],collisions:[],msgs:["—","—","SWA-77 RWY-B final","AAL-213 RWY-A approach"]},
+      {commits:['L','L','L','L'],collisions:[],landed:[0,1,2,3],msgs:["—","—","SWA-77 wheels down — MAYDAY resolved","AAL-213 clear — all aircraft landed"]},
     ]
   }
 };
 
-// ═══════════════════════════════════════════════
-// STATE
-// ═══════════════════════════════════════════════
 let mode = 'untrained';
-let blips = AIRCRAFT.map((a,i)=>({
-  ...a, x:a.sx, y:a.sy, tx:a.hx, ty:a.hy,
-  status:'hold', fuel:100, trails:[],
-  crashAnim:0, landAnim:0
-}));
+let blips = [];
 let sweepAngle = -Math.PI/2;
 let episodeRunning = false;
 let currentRound = -1;
@@ -834,48 +843,89 @@ let collisionCount = 0;
 let landedCount = 0;
 let crashedSet = new Set();
 let landedSet = new Set();
+let explosionParticles = []; // particle system for collisions
 
-// ═══════════════════════════════════════════════
-// RADAR CANVAS
-// ═══════════════════════════════════════════════
-const radarCanvas = document.getElementById('radar');
+const radarCanvas = document.getElementById('radar-canvas');
 const rctx = radarCanvas.getContext('2d');
+
+function initBlips(){
+  blips = AIRCRAFT.map(a=>({
+    ...a, x:a.sx, y:a.sy, tx:a.hx, ty:a.hy,
+    status:'hold', fuel:100, trails:[], crashAnim:0,
+    prevX:a.sx, prevY:a.sy
+  }));
+}
+initBlips();
+
+function drawTriangle(ctx, x, y, size, angle, color){
+  ctx.save();
+  ctx.translate(x, y);
+  ctx.rotate(angle);
+  ctx.beginPath();
+  ctx.moveTo(0, -size);
+  ctx.lineTo(size*0.6, size*0.7);
+  ctx.lineTo(-size*0.6, size*0.7);
+  ctx.closePath();
+  ctx.fillStyle = color;
+  ctx.shadowBlur = 10;
+  ctx.shadowColor = color;
+  ctx.fill();
+  ctx.shadowBlur = 0;
+  ctx.restore();
+}
+
+function hexToRgb(hex){
+  const r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16);
+  return `${r},${g},${b}`;
+}
 
 function drawRadar(){
   rctx.clearRect(0,0,420,420);
-
-  // Background
-  rctx.fillStyle='#000d05';
+  rctx.fillStyle='#020a06';
   rctx.fillRect(0,0,420,420);
 
-  // Grid circles
+  // 4 concentric grid rings
   for(let i=1;i<=4;i++){
     rctx.beginPath();
     rctx.arc(CX,CY,R*(i/4),0,Math.PI*2);
-    rctx.strokeStyle=`rgba(0,255,127,${0.06+i*0.02})`;
+    rctx.strokeStyle=`rgba(10,42,20,${0.4+i*0.1})`;
     rctx.lineWidth=1;
     rctx.stroke();
   }
 
-  // Cross hairs
-  rctx.strokeStyle='rgba(0,255,127,0.06)';
-  rctx.beginPath();rctx.moveTo(CX,15);rctx.lineTo(CX,405);rctx.stroke();
-  rctx.beginPath();rctx.moveTo(15,CY);rctx.lineTo(405,CY);rctx.stroke();
+  // Crosshairs
+  rctx.strokeStyle='rgba(10,42,20,0.5)';
+  rctx.lineWidth=1;
+  rctx.beginPath();rctx.moveTo(CX,20);rctx.lineTo(CX,400);rctx.stroke();
+  rctx.beginPath();rctx.moveTo(20,CY);rctx.lineTo(400,CY);rctx.stroke();
+
+  // Degree markers every 30°
+  for(let deg=0;deg<360;deg+=30){
+    const rad=deg*Math.PI/180;
+    const x1=CX+Math.cos(rad)*(R-8);
+    const y1=CY+Math.sin(rad)*(R-8);
+    const x2=CX+Math.cos(rad)*R;
+    const y2=CY+Math.sin(rad)*R;
+    rctx.beginPath();rctx.moveTo(x1,y1);rctx.lineTo(x2,y2);
+    rctx.strokeStyle='rgba(0,255,127,0.25)';rctx.lineWidth=1;rctx.stroke();
+    const lx=CX+Math.cos(rad)*(R+10);
+    const ly=CY+Math.sin(rad)*(R+10);
+    rctx.fillStyle='rgba(0,255,127,0.2)';
+    rctx.font='7px "Share Tech Mono"';
+    rctx.textAlign='center';rctx.textBaseline='middle';
+    rctx.fillText(deg+'°',lx,ly);
+  }
 
   // Sweep gradient
-  const sweepLen = Math.PI/2;
-  const grad = rctx.createConicalGradient
-    ? null : null; // fallback to manual arcs
-  rctx.save();
-  rctx.translate(CX,CY);
-  for(let i=0;i<24;i++){
-    const a = sweepAngle - (i/24)*sweepLen;
-    const alpha = (1-i/24)*0.35;
+  rctx.save();rctx.translate(CX,CY);
+  const sweepLen=Math.PI/2;
+  for(let i=0;i<20;i++){
+    const a=sweepAngle-(i/20)*sweepLen;
     rctx.beginPath();
     rctx.moveTo(0,0);
-    rctx.arc(0,0,R,a,a+sweepLen/24);
+    rctx.arc(0,0,R,a,a+sweepLen/20);
     rctx.lineTo(0,0);
-    rctx.fillStyle=`rgba(0,255,127,${alpha})`;
+    rctx.fillStyle=`rgba(0,255,127,${(1-i/20)*0.3})`;
     rctx.fill();
   }
   rctx.restore();
@@ -883,132 +933,113 @@ function drawRadar(){
   // Sweep line
   rctx.beginPath();
   rctx.moveTo(CX,CY);
-  rctx.lineTo(CX+Math.cos(sweepAngle)*R, CY+Math.sin(sweepAngle)*R);
-  rctx.strokeStyle='rgba(0,255,127,0.9)';
-  rctx.lineWidth=2;
-  rctx.stroke();
+  rctx.lineTo(CX+Math.cos(sweepAngle)*R,CY+Math.sin(sweepAngle)*R);
+  rctx.strokeStyle='rgba(0,255,127,0.9)';rctx.lineWidth=2;rctx.stroke();
 
   // Runway zones
-  [RWY_A, RWY_B].forEach(rwy=>{
-    rctx.beginPath();
-    rctx.rect(rwy.x-22,rwy.y-6,44,12);
-    rctx.fillStyle='rgba(0,255,127,0.08)';
-    rctx.fill();
-    rctx.strokeStyle='rgba(0,255,127,0.4)';
+  [RWY_A,RWY_B].forEach(rwy=>{
+    rctx.fillStyle='rgba(0,255,127,0.06)';
+    rctx.strokeStyle='rgba(0,255,127,0.35)';
     rctx.lineWidth=1;
-    rctx.stroke();
+    rctx.beginPath();rctx.rect(rwy.x-24,rwy.y-8,48,16);
+    rctx.fill();rctx.stroke();
     rctx.fillStyle='rgba(0,255,127,0.7)';
     rctx.font='9px "Share Tech Mono"';
-    rctx.textAlign='center';
-    rctx.fillText(rwy.label, rwy.x, rwy.y+4);
+    rctx.textAlign='center';rctx.textBaseline='middle';
+    rctx.fillText(rwy.label,rwy.x,rwy.y);
   });
 
-  // Blips
+  // Update and draw blips
   blips.forEach((b,i)=>{
-    // Ease toward target
-    if(b.status!=='landed' && b.status!=='crashed'){
-      b.x += (b.tx - b.x)*0.08;
-      b.y += (b.ty - b.y)*0.08;
+    if(b.status!=='landed'&&b.status!=='crashed'){
+      b.prevX=b.x; b.prevY=b.y;
+      b.x+=(b.tx-b.x)*0.08;
+      b.y+=(b.ty-b.y)*0.08;
     }
-
     // Trails
-    if(Math.random()<0.15 && b.status!=='landed' && b.status!=='crashed'){
-      b.trails.push({x:b.x,y:b.y,a:0.6});
+    if(Math.random()<0.12&&b.status!=='landed'&&b.status!=='crashed'){
+      b.trails.push({x:b.x,y:b.y,a:0.5});
     }
-    b.trails = b.trails.map(t=>({...t,a:t.a-0.04})).filter(t=>t.a>0);
+    b.trails=b.trails.map(t=>({...t,a:t.a-0.035})).filter(t=>t.a>0);
     b.trails.forEach(t=>{
-      rctx.beginPath();
-      rctx.arc(t.x,t.y,2,0,Math.PI*2);
-      rctx.fillStyle=`rgba(${hexToRgb(b.color)},${t.a})`;
-      rctx.fill();
+      rctx.beginPath();rctx.arc(t.x,t.y,2,0,Math.PI*2);
+      rctx.fillStyle=`rgba(0,255,127,${t.a})`;rctx.fill();
     });
 
     if(b.status==='landed'){
-      // Faded landed dot
-      rctx.beginPath();
-      rctx.arc(b.x,b.y,4,0,Math.PI*2);
-      rctx.fillStyle='rgba(0,255,127,0.2)';
-      rctx.fill();
+      rctx.beginPath();rctx.arc(b.x,b.y,3,0,Math.PI*2);
+      rctx.fillStyle='rgba(0,255,127,0.15)';rctx.fill();
       return;
     }
     if(b.status==='crashed'){
-      // Explosion
       if(b.crashAnim>0){
         b.crashAnim-=2;
-        rctx.beginPath();
-        rctx.arc(b.x,b.y,b.crashAnim*0.5,0,Math.PI*2);
-        rctx.strokeStyle=`rgba(255,68,68,${b.crashAnim/30})`;
-        rctx.lineWidth=2;
-        rctx.stroke();
         for(let k=0;k<6;k++){
-          const ang=k*(Math.PI/3)+Date.now()*0.01;
-          const len=b.crashAnim*0.8;
-          rctx.beginPath();
-          rctx.moveTo(b.x,b.y);
+          const ang=k*(Math.PI/3)+Date.now()*0.008;
+          const len=b.crashAnim*0.9;
+          rctx.beginPath();rctx.moveTo(b.x,b.y);
           rctx.lineTo(b.x+Math.cos(ang)*len,b.y+Math.sin(ang)*len);
-          rctx.strokeStyle=`rgba(255,${100+k*20},0,${b.crashAnim/30})`;
-          rctx.lineWidth=1.5;
-          rctx.stroke();
+          rctx.strokeStyle=`rgba(255,59,59,${b.crashAnim/30})`;
+          rctx.lineWidth=1.5;rctx.stroke();
         }
       }
       return;
     }
 
-    // Collision flash
-    const col = b.status==='collision'?'#ff4444':
-                b.emergency&&b.fuel<30?'#ff4444':b.color;
+    // Direction angle
+    const dx=b.tx-b.x, dy=b.ty-b.y;
+    const ang=Math.atan2(dy,dx)+Math.PI/2;
+    const col=b.status==='collision'?'#ff3b3b':b.color;
 
-    // Blip glow
-    const pulse = 0.5+0.5*Math.sin(Date.now()*0.004+i);
-    rctx.beginPath();
-    rctx.arc(b.x,b.y,10,0,Math.PI*2);
-    rctx.fillStyle=`rgba(${hexToRgb(col)},${0.1*pulse})`;
-    rctx.fill();
+    // Emergency pulse ring
+    if(b.emergency){
+      const pulse=0.5+0.5*Math.sin(Date.now()*0.006+i);
+      rctx.beginPath();rctx.arc(b.x,b.y,14+4*pulse,0,Math.PI*2);
+      rctx.strokeStyle=`rgba(255,59,59,${0.5*pulse})`;rctx.lineWidth=1.5;rctx.stroke();
+    }
 
-    rctx.beginPath();
-    rctx.arc(b.x,b.y,5,0,Math.PI*2);
-    rctx.fillStyle=col;
-    rctx.shadowBlur=12;
-    rctx.shadowColor=col;
-    rctx.fill();
-    rctx.shadowBlur=0;
+    // Triangle blip
+    drawTriangle(rctx, b.x, b.y, 7, ang, col);
 
     // Label
     rctx.fillStyle=col;
-    rctx.font='9px "Share Tech Mono"';
-    rctx.textAlign='left';
-    rctx.fillText(b.id,b.x+8,b.y-6);
+    rctx.font='8px "Share Tech Mono"';
+    rctx.textAlign='left';rctx.textBaseline='top';
+    rctx.fillText(b.id,b.x+10,b.y-6);
+  });
 
-    // Emergency indicator
-    if(b.emergency){
-      rctx.beginPath();
-      rctx.arc(b.x,b.y,9+4*pulse,0,Math.PI*2);
-      rctx.strokeStyle=`rgba(255,68,68,${0.5*pulse})`;
-      rctx.lineWidth=1.5;
-      rctx.stroke();
-    }
+  // Explosion particles (collision bursts)
+  explosionParticles=explosionParticles.filter(p=>p.life>0);
+  explosionParticles.forEach(p=>{
+    p.x+=Math.cos(p.angle)*p.speed;
+    p.y+=Math.sin(p.angle)*p.speed;
+    p.life--;
+    rctx.beginPath();rctx.arc(p.x,p.y,p.life>10?3:2,0,Math.PI*2);
+    rctx.fillStyle=`rgba(255,59,59,${p.life/30})`;rctx.fill();
   });
 
   // Center dot
-  rctx.beginPath();
-  rctx.arc(CX,CY,3,0,Math.PI*2);
-  rctx.fillStyle='rgba(0,255,127,0.6)';
-  rctx.fill();
+  rctx.beginPath();rctx.arc(CX,CY,3,0,Math.PI*2);
+  rctx.fillStyle='rgba(0,255,127,0.6)';rctx.fill();
 
-  sweepAngle += 0.012;
+  sweepAngle+=0.015;
   requestAnimationFrame(drawRadar);
 }
 drawRadar();
 
-function hexToRgb(hex){
-  const r=parseInt(hex.slice(1,3),16);
-  const g=parseInt(hex.slice(3,5),16);
-  const b=parseInt(hex.slice(5,7),16);
-  return `${r},${g},${b}`;
+function spawnExplosionParticles(x,y){
+  for(let k=0;k<6;k++){
+    explosionParticles.push({
+      x,y,
+      angle:k*(Math.PI/3)+Math.random()*0.3,
+      speed:2+Math.random()*2,
+      life:30
+    });
+  }
 }
 
 // ═══════════════════════════════════════════════
-// DEMO LOGIC
+// EPISODE DEMO LOGIC
 // ═══════════════════════════════════════════════
 function setMode(m){
   mode=m;
@@ -1018,126 +1049,92 @@ function setMode(m){
 }
 
 function resetDemo(){
-  episodeRunning=false;
-  currentRound=-1;
-  collisionCount=0;
-  landedCount=0;
-  crashedSet=new Set();
-  landedSet=new Set();
-
-  blips=AIRCRAFT.map((a,i)=>({
-    ...a,x:a.sx,y:a.sy,tx:a.hx,ty:a.hy,
-    status:'hold',fuel:100,trails:[],crashAnim:0,landAnim:0
-  }));
-
+  episodeRunning=false;currentRound=-1;
+  collisionCount=0;landedCount=0;
+  crashedSet=new Set();landedSet=new Set();
+  explosionParticles=[];
+  initBlips();
   for(let i=0;i<4;i++){
-    const strip=document.getElementById(`strip-${i}`);
-    strip.className='strip';
-    document.getElementById(`tag-${i}`).textContent='HOLD';
-    document.getElementById(`tag-${i}`).className='strip-tag tag-hold';
-    document.getElementById(`fuel-${i}`).style.width='100%';
-    document.getElementById(`fuel-${i}`).className='strip-fuel';
-    document.getElementById(`rnd-${i}`).textContent='RND —';
+    document.getElementById('strip-'+i).className='strip';
+    document.getElementById('tag-'+i).textContent='HOLD';
+    document.getElementById('tag-'+i).className='strip-tag tag-hold';
+    document.getElementById('fuel-'+i).style.width='100%';
+    document.getElementById('fuel-'+i).className='strip-fuel';
+    document.getElementById('rnd-'+i).textContent='—';
   }
-  document.getElementById('comms-log').innerHTML='<div class="log-line" style="color:rgba(0,255,127,0.25)">— awaiting episode start —</div>';
+  document.getElementById('comms-log').innerHTML='<div class="log-line" style="color:rgba(0,255,127,0.2)">— awaiting episode start —</div>';
   document.getElementById('m-collisions').textContent='0';
   document.getElementById('m-landed').textContent='0';
   const ov=document.getElementById('m-outcome');
-  ov.textContent='—';
-  ov.style.color='rgba(0,255,127,0.35)';
-  ov.style.fontSize='14px';
-
+  ov.textContent='—';ov.style.color='rgba(0,255,127,.3)';ov.style.fontSize='13px';
   const rb=document.getElementById('run-btn');
-  rb.disabled=false;
-  rb.textContent='▶ RUN EPISODE';
-  rb.className='ctrl-btn';
+  rb.disabled=false;rb.textContent='▶ RUN EPISODE';rb.className='ctrl-btn';
+  document.getElementById('round-counter').textContent='READY';
 }
 
 function runEpisode(){
   if(episodeRunning)return;
-  episodeRunning=true;
-  currentRound=0;
+  episodeRunning=true;currentRound=0;
   const rb=document.getElementById('run-btn');
-  rb.disabled=true;
-  rb.className='ctrl-btn running';
-  rb.textContent='◉ RUNNING…';
+  rb.disabled=true;rb.className='ctrl-btn running';rb.textContent='◉ RUNNING…';
   playNextRound();
 }
 
 function playNextRound(){
   const ep=EPISODES[mode];
-  if(currentRound>=ep.rounds.length){
-    finishEpisode(ep.outcome);
-    return;
-  }
+  if(currentRound>=ep.rounds.length){ finishEpisode(ep.outcome); return; }
   const rnd=ep.rounds[currentRound];
-  const rndNum=currentRound+1;
-  processRound(rnd, rndNum);
+  processRound(rnd, currentRound+1);
   currentRound++;
   setTimeout(playNextRound, 1600);
 }
 
 function processRound(rnd, rndNum){
-  const commitMap={A:'RWY-A', B:'RWY-B', H:'HOLD', L:'LANDED', X:'CRASH'};
+  document.getElementById('round-counter').textContent='RND '+rndNum;
   const collide=new Set();
   if(rnd.collisions&&rnd.collisions.includes('A')) rnd.commits.forEach((c,i)=>{ if(c==='A') collide.add(i); });
   if(rnd.collisions&&rnd.collisions.includes('B')) rnd.commits.forEach((c,i)=>{ if(c==='B') collide.add(i); });
 
   rnd.commits.forEach((c,i)=>{
     if(landedSet.has(i)||crashedSet.has(i))return;
-
-    const strip=document.getElementById(`strip-${i}`);
-    const tag=document.getElementById(`tag-${i}`);
-    const fuel=document.getElementById(`fuel-${i}`);
-    const rndEl=document.getElementById(`rnd-${i}`);
-
-    rndEl.textContent=`RND ${rndNum}`;
-    const fuelPct=Math.max(0,100-(rndNum-1)*12.5);
-    fuel.style.width=fuelPct+'%';
-    fuel.className='strip-fuel'+(fuelPct<=25?' critical':fuelPct<=50?' low':'');
+    const strip=document.getElementById('strip-'+i);
+    const tag=document.getElementById('tag-'+i);
+    const fuel=document.getElementById('fuel-'+i);
+    document.getElementById('rnd-'+i).textContent='R'+rndNum;
+    const fp=Math.max(0,100-(rndNum-1)*12.5);
+    fuel.style.width=fp+'%';
+    fuel.className='strip-fuel'+(fp<=25?' crit':fp<=50?' low':'');
 
     if(c==='L'){
-      landedSet.add(i);
-      landedCount++;
+      landedSet.add(i);landedCount++;
       blips[i].status='landed';
-      blips[i].tx=c==='L'?blips[i].status==='landed'?blips[i].x:RWY_A.x:blips[i].x;
-      const rwy=EPISODES[mode].rounds[currentRound-1]?.commits[i];
-      blips[i].tx=(rwy==='B'?RWY_B.x:RWY_A.x);
-      blips[i].ty=(rwy==='B'?RWY_B.y:RWY_A.y);
-      strip.className='strip landed';
-      tag.textContent='LANDED';tag.className='strip-tag tag-land';
+      strip.className='strip landed';tag.textContent='LANDED';tag.className='strip-tag tag-land';
       document.getElementById('m-landed').textContent=landedCount;
       return;
     }
     if(c==='X'){
       crashedSet.add(i);
-      blips[i].status='crashed';
-      blips[i].crashAnim=30;
-      strip.className='strip crashed';
-      tag.textContent='LOST';tag.className='strip-tag tag-crash';
+      blips[i].status='crashed';blips[i].crashAnim=30;
+      spawnExplosionParticles(blips[i].x,blips[i].y);
+      strip.className='strip crashed';tag.textContent='LOST';tag.className='strip-tag tag-crash';
       return;
     }
     if(c==='H'){
-      blips[i].status='hold';
-      blips[i].tx=AIRCRAFT[i].hx;
-      blips[i].ty=AIRCRAFT[i].hy;
-      tag.textContent='HOLD';tag.className='strip-tag tag-hold';
-      strip.className='strip';
+      blips[i].status='hold';blips[i].tx=AIRCRAFT[i].hx;blips[i].ty=AIRCRAFT[i].hy;
+      tag.textContent='HOLD';tag.className='strip-tag tag-hold';strip.className='strip';
       return;
     }
-
-    const rwyTarget = c==='A'?RWY_A:RWY_B;
+    const rwyTarget=c==='A'?RWY_A:RWY_B;
     if(collide.has(i)){
       blips[i].status='collision';
       blips[i].tx=rwyTarget.x+(Math.random()-0.5)*30;
       blips[i].ty=rwyTarget.y+(Math.random()-0.5)*30;
       strip.className='strip collision';
       tag.textContent='COLL';tag.className='strip-tag tag-crash';
+      spawnExplosionParticles(rwyTarget.x,rwyTarget.y);
       setTimeout(()=>{
         if(blips[i].status==='collision'){
-          blips[i].status='hold';
-          blips[i].tx=AIRCRAFT[i].hx;
-          blips[i].ty=AIRCRAFT[i].hy;
+          blips[i].status='hold';blips[i].tx=AIRCRAFT[i].hx;blips[i].ty=AIRCRAFT[i].hy;
           strip.className='strip';
         }
       },600);
@@ -1145,28 +1142,25 @@ function processRound(rnd, rndNum){
       document.getElementById('m-collisions').textContent=collisionCount;
     } else {
       blips[i].status=c==='A'?'rwy-a':'rwy-b';
-      blips[i].tx=rwyTarget.x;
-      blips[i].ty=rwyTarget.y;
-      strip.className=`strip ${c==='A'?'rwy-a':'rwy-b'}`;
+      blips[i].tx=rwyTarget.x;blips[i].ty=rwyTarget.y;
+      strip.className='strip '+(c==='A'?'rwy-a':'rwy-b');
       tag.textContent=c==='A'?'RWY-A':'RWY-B';
-      tag.className=`strip-tag ${c==='A'?'tag-a':'tag-b'}`;
+      tag.className='strip-tag '+(c==='A'?'tag-a':'tag-b');
     }
   });
 
   // Comms
   const log=document.getElementById('comms-log');
-  const callsigns=['UAL-441','DAL-892','SWA-77','AAL-213'];
+  const calls=['UAL-441','DAL-892','SWA-77','AAL-213'];
   let lines='';
   if(rnd.collisions&&rnd.collisions.length>0){
-    lines+=`<div class="log-line collision-line"><span class="ts">${String(rndNum).padStart(2,'0')}:</span> ⚠ RUNWAY COLLISION ON ${rnd.collisions.map(c=>'RWY-'+c).join(', ')}</div>`;
+    lines+=`<div class="log-line collision-line"><span class="ts">${String(rndNum).padStart(2,'0')}:</span> ⚠ RUNWAY COLLISION — ${rnd.collisions.map(c=>'RWY-'+c).join(', ')}</div>`;
   }
-  rnd.msgs.forEach((msg,i)=>{
+  rnd.msgs&&rnd.msgs.forEach((msg,i)=>{
     if(!msg||msg==='—')return;
-    const isEmergency=(i===2&&blips[2].emergency);
-    const cl=isEmergency?'log-line priority':
-             rnd.commits[i]==='L'?'log-line landed-line':
-             collide.has(i)?'log-line collision-line':'log-line';
-    lines+=`<div class="${cl}"><span class="ts">${String(rndNum).padStart(2,'0')}:</span><span class="call">${callsigns[i]}:</span>${msg}</div>`;
+    const em=i===2&&blips[2].emergency;
+    const cl=em?'log-line priority':rnd.commits[i]==='L'?'log-line landed-line':collide.has(i)?'log-line collision-line':'log-line';
+    lines+=`<div class="${cl}"><span class="ts">${String(rndNum).padStart(2,'0')}:</span><span class="call">${calls[i]}:</span>${msg}</div>`;
   });
   log.innerHTML+=lines;
   log.scrollTop=log.scrollHeight;
@@ -1174,19 +1168,12 @@ function processRound(rnd, rndNum){
 
 function finishEpisode(outcome){
   const ov=document.getElementById('m-outcome');
-  if(outcome==='WIN'){
-    ov.textContent='WIN';
-    ov.style.color='#00ff7f';
-    ov.style.fontSize='18px';
-  } else {
-    ov.textContent='FAIL';
-    ov.style.color='#ff4444';
-    ov.style.fontSize='18px';
-  }
-  document.getElementById('run-btn').disabled=false;
-  document.getElementById('run-btn').className='ctrl-btn';
-  document.getElementById('run-btn').textContent='▶ RUN AGAIN';
+  if(outcome==='WIN'){ov.textContent='WIN';ov.style.color='#00ff7f';ov.style.fontSize='16px';}
+  else{ov.textContent='FAIL';ov.style.color='#ff3b3b';ov.style.fontSize='16px';}
+  const rb=document.getElementById('run-btn');
+  rb.disabled=false;rb.className='ctrl-btn';rb.textContent='▶ RUN AGAIN';
   episodeRunning=false;
+  document.getElementById('round-counter').textContent=outcome==='WIN'?'WIN':'FAIL';
 }
 
 function showCompare(){ document.getElementById('compare-overlay').classList.add('open'); }
@@ -1195,312 +1182,151 @@ function hideCompare(){ document.getElementById('compare-overlay').classList.rem
 // ═══════════════════════════════════════════════
 // LIVE API
 // ═══════════════════════════════════════════════
-function setApiOutput(text){
-  document.getElementById('api-output').textContent=text;
-}
-
 async function checkHealth(){
-  const dot=document.getElementById('status-dot');
-  const txt=document.getElementById('status-text');
+  const dot=document.getElementById('api-dot');
+  const txt=document.getElementById('api-status-text');
   try{
     const r=await fetch('/health');
-    if(r.ok){
-      dot.className='status-dot';
-      txt.textContent='ENV ONLINE';
-    } else {
-      dot.className='status-dot offline';
-      txt.textContent='ENV ERROR';
-    }
-  }catch(e){
-    dot.className='status-dot offline';
-    txt.textContent='ENV UNREACHABLE';
-  }
+    if(r.ok){dot.className='api-dot';txt.textContent='ENV ONLINE';}
+    else{dot.className='api-dot offline';txt.textContent='ENV ERROR';}
+  }catch(e){dot.className='api-dot offline';txt.textContent='ENV UNREACHABLE';}
 }
-
 async function fetchState(){
-  setApiOutput('fetching /state …');
+  document.getElementById('api-output').textContent='fetching /state …';
   try{
     const r=await fetch('/state');
-    const data=await r.json();
-    setApiOutput(JSON.stringify(data,null,2));
-  }catch(e){
-    setApiOutput('ERROR: '+e.message);
-  }
+    document.getElementById('api-output').textContent=JSON.stringify(await r.json(),null,2);
+  }catch(e){document.getElementById('api-output').textContent='ERROR: '+e.message;}
 }
-
 async function resetEnv(){
-  setApiOutput('calling POST /reset …');
+  document.getElementById('api-output').textContent='calling POST /reset …';
   try{
     const r=await fetch('/reset',{method:'POST',headers:{'Content-Type':'application/json'},body:'{}'});
-    const data=await r.json();
-    setApiOutput(JSON.stringify(data,null,2));
-  }catch(e){
-    setApiOutput('ERROR: '+e.message);
-  }
+    document.getElementById('api-output').textContent=JSON.stringify(await r.json(),null,2);
+  }catch(e){document.getElementById('api-output').textContent='ERROR: '+e.message;}
 }
-
 checkHealth();
-setInterval(checkHealth, 15000);
+setInterval(checkHealth,15000);
 
 // ═══════════════════════════════════════════════
 // CHARTS
 // ═══════════════════════════════════════════════
 const BAR_DATA=[
-  {label:'Win Rate',   base:0.800, trained:0.700},
-  {label:'R1 Service', base:0.860, trained:0.745},
-  {label:'R2 Uptime',  base:0.263, trained:0.287},
-  {label:'R3 Collision',base:0.767,trained:0.767},
-  {label:'R4 Yield',   base:0.169, trained:0.276},
+  {label:'Win Rate',  base:0.800,trained:0.700},
+  {label:'R1 Svc',   base:0.860,trained:0.745},
+  {label:'R2 Uptime',base:0.263,trained:0.287},
+  {label:'R3 Coll',  base:0.767,trained:0.767},
+  {label:'R4 Yield', base:0.169,trained:0.276},
 ];
-
 const LINE_DATA=[0.625,0.875,0.75,0.625,1.0,0.75,0.375,1.0,0.625,1.0,0.375,0.25,0.75,0.375,1.0,1.0];
 const BASELINE_LINE=0.80;
-
-let barAnimated=false;
-let barProgress=0;
+let barAnimated=false,barProgress=0;
 
 function drawBarChart(progress){
   const cv=document.getElementById('bar-chart');
+  if(!cv)return;
   const ctx=cv.getContext('2d');
   const W=cv.width,H=cv.height;
   ctx.clearRect(0,0,W,H);
-
-  const padL=90,padR=20,padT=10,padB=20;
-  const chartW=W-padL-padR;
-  const rowH=(H-padT-padB)/BAR_DATA.length;
-  const barH=Math.floor(rowH*0.3);
-
-  // Grid lines
+  const pL=90,pR=20,pT=10,pB=20;
+  const cW=W-pL-pR;
+  const rowH=(H-pT-pB)/BAR_DATA.length;
+  const bH=Math.floor(rowH*0.3);
   for(let v=0;v<=5;v++){
-    const x=padL+v*(chartW/5);
-    ctx.beginPath();ctx.moveTo(x,padT);ctx.lineTo(x,H-padB);
+    const x=pL+v*(cW/5);
+    ctx.beginPath();ctx.moveTo(x,pT);ctx.lineTo(x,H-pB);
     ctx.strokeStyle='rgba(0,255,127,0.07)';ctx.lineWidth=1;ctx.stroke();
-    ctx.fillStyle='rgba(0,255,127,0.3)';ctx.font='9px "Share Tech Mono"';
-    ctx.textAlign='center';
-    ctx.fillText((v*0.2).toFixed(1),x,H-padB+12);
+    ctx.fillStyle='rgba(0,255,127,0.3)';ctx.font='9px "Share Tech Mono"';ctx.textAlign='center';
+    ctx.fillText((v*0.2).toFixed(1),x,H-pB+12);
   }
-
   BAR_DATA.forEach((d,i)=>{
-    const y=padT+i*rowH+rowH*0.15;
-
-    // Label
-    ctx.fillStyle='rgba(0,255,127,0.6)';ctx.font='9px "Share Tech Mono"';
-    ctx.textAlign='right';
-    ctx.fillText(d.label,padL-6,y+barH*0.7);
-
-    // Baseline bar
-    const bw=Math.min(d.base*chartW*progress,d.base*chartW);
-    ctx.fillStyle='rgba(255,68,68,0.6)';
-    ctx.fillRect(padL,y,bw,barH);
-
-    // Trained bar
-    const tw=Math.min(d.trained*chartW*progress,d.trained*chartW);
+    const y=pT+i*rowH+rowH*0.15;
+    ctx.fillStyle='rgba(0,255,127,0.6)';ctx.font='9px "Share Tech Mono"';ctx.textAlign='right';
+    ctx.fillText(d.label,pL-6,y+bH*0.7);
+    const bw=Math.min(d.base*cW*progress,d.base*cW);
+    ctx.fillStyle='rgba(255,59,59,0.6)';ctx.fillRect(pL,y,bw,bH);
+    const tw=Math.min(d.trained*cW*progress,d.trained*cW);
     ctx.fillStyle=d.trained>=d.base?'rgba(0,255,127,0.7)':'rgba(75,167,247,0.7)';
-    ctx.fillRect(padL,y+barH+3,tw,barH);
-
-    // Values
+    ctx.fillRect(pL,y+bH+3,tw,bH);
     if(progress>0.8){
       ctx.fillStyle='rgba(0,255,127,0.5)';ctx.font='9px "Share Tech Mono"';ctx.textAlign='left';
-      ctx.fillText(d.base.toFixed(3),padL+bw+3,y+barH-1);
-      ctx.fillText(d.trained.toFixed(3),padL+tw+3,y+barH+barH+2);
+      ctx.fillText(d.base.toFixed(3),pL+bw+3,y+bH-1);
+      ctx.fillText(d.trained.toFixed(3),pL+tw+3,y+bH+bH+2);
     }
   });
-
-  // Legend
-  ctx.fillStyle='rgba(255,68,68,0.8)';ctx.fillRect(padL,H-padB+18,16,6);
+  ctx.fillStyle='rgba(255,59,59,0.8)';ctx.fillRect(pL,H-pB+18,16,6);
   ctx.fillStyle='rgba(0,255,127,0.5)';ctx.font='9px "Share Tech Mono"';ctx.textAlign='left';
-  ctx.fillText('baseline',padL+20,H-padB+24);
-  ctx.fillStyle='rgba(75,167,247,0.8)';ctx.fillRect(padL+90,H-padB+18,16,6);
-  ctx.fillStyle='rgba(0,255,127,0.5)';
-  ctx.fillText('trained',padL+110,H-padB+24);
+  ctx.fillText('baseline',pL+20,H-pB+24);
+  ctx.fillStyle='rgba(75,167,247,0.8)';ctx.fillRect(pL+90,H-pB+18,16,6);
+  ctx.fillText('trained',pL+110,H-pB+24);
 }
 
 function drawLineChart(){
   const cv=document.getElementById('line-chart');
+  if(!cv)return;
   const ctx=cv.getContext('2d');
   const W=cv.width,H=cv.height;
   ctx.clearRect(0,0,W,H);
-
-  const padL=36,padR=16,padT=16,padB=28;
-  const chartW=W-padL-padR;
-  const chartH=H-padT-padB;
-  const n=LINE_DATA.length;
-
-  // Grid
+  const pL=36,pR=16,pT=16,pB=28;
+  const cW=W-pL-pR,cH=H-pT-pB,n=LINE_DATA.length;
   for(let v=0;v<=4;v++){
-    const y=padT+chartH-(v/4)*chartH;
-    ctx.beginPath();ctx.moveTo(padL,y);ctx.lineTo(W-padR,y);
+    const y=pT+cH-(v/4)*cH;
+    ctx.beginPath();ctx.moveTo(pL,y);ctx.lineTo(W-pR,y);
     ctx.strokeStyle='rgba(0,255,127,0.07)';ctx.lineWidth=1;ctx.stroke();
-    ctx.fillStyle='rgba(0,255,127,0.35)';ctx.font='9px "Share Tech Mono"';
-    ctx.textAlign='right';
-    ctx.fillText((v*0.25).toFixed(2),padL-4,y+3);
+    ctx.fillStyle='rgba(0,255,127,0.35)';ctx.font='9px "Share Tech Mono"';ctx.textAlign='right';
+    ctx.fillText((v*0.25).toFixed(2),pL-4,y+3);
   }
-
-  // Baseline dashed line
-  const baseY=padT+chartH-BASELINE_LINE*chartH;
-  ctx.beginPath();ctx.moveTo(padL,baseY);ctx.lineTo(W-padR,baseY);
-  ctx.strokeStyle='rgba(255,68,68,0.5)';ctx.lineWidth=1.5;
-  ctx.setLineDash([4,4]);ctx.stroke();ctx.setLineDash([]);
-  ctx.fillStyle='rgba(255,68,68,0.6)';ctx.font='9px "Share Tech Mono"';
-  ctx.textAlign='left';ctx.fillText('baseline 0.80',padL+4,baseY-4);
-
-  // Rolling mean
-  const window=4;
-  const rolling=LINE_DATA.map((_,i)=>{
-    const sl=LINE_DATA.slice(Math.max(0,i-window+1),i+1);
+  const baseY=pT+cH-BASELINE_LINE*cH;
+  ctx.beginPath();ctx.moveTo(pL,baseY);ctx.lineTo(W-pR,baseY);
+  ctx.strokeStyle='rgba(255,59,59,0.5)';ctx.lineWidth=1.5;ctx.setLineDash([4,4]);ctx.stroke();ctx.setLineDash([]);
+  ctx.fillStyle='rgba(255,59,59,0.6)';ctx.font='9px "Share Tech Mono"';ctx.textAlign='left';
+  ctx.fillText('baseline 0.80',pL+4,baseY-4);
+  const win=4;
+  const roll=LINE_DATA.map((_,i)=>{
+    const sl=LINE_DATA.slice(Math.max(0,i-win+1),i+1);
     return sl.reduce((a,b)=>a+b,0)/sl.length;
   });
   ctx.beginPath();
-  rolling.forEach((v,i)=>{
-    const x=padL+(i/(n-1))*chartW;
-    const y=padT+chartH-v*chartH;
+  roll.forEach((v,i)=>{
+    const x=pL+(i/(n-1))*cW,y=pT+cH-v*cH;
     i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
   });
   ctx.strokeStyle='rgba(75,167,247,0.8)';ctx.lineWidth=2;ctx.stroke();
-
-  // Data points and connecting line
   ctx.beginPath();
   LINE_DATA.forEach((v,i)=>{
-    const x=padL+(i/(n-1))*chartW;
-    const y=padT+chartH-v*chartH;
+    const x=pL+(i/(n-1))*cW,y=pT+cH-v*cH;
     i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);
   });
-  ctx.strokeStyle='rgba(0,255,127,0.25)';ctx.lineWidth=1;ctx.stroke();
-
+  ctx.strokeStyle='rgba(0,255,127,0.2)';ctx.lineWidth=1;ctx.stroke();
   LINE_DATA.forEach((v,i)=>{
-    const x=padL+(i/(n-1))*chartW;
-    const y=padT+chartH-v*chartH;
+    const x=pL+(i/(n-1))*cW,y=pT+cH-v*cH;
     ctx.beginPath();ctx.arc(x,y,4,0,Math.PI*2);
     ctx.fillStyle=v===1.0?'#00ff7f':'rgba(75,167,247,0.9)';
     ctx.shadowBlur=v===1.0?8:0;ctx.shadowColor='#00ff7f';
     ctx.fill();ctx.shadowBlur=0;
   });
-
-  // X axis labels
   ctx.fillStyle='rgba(0,255,127,0.35)';ctx.font='9px "Share Tech Mono"';ctx.textAlign='center';
   LINE_DATA.forEach((_,i)=>{
-    if(i%2===0){
-      const x=padL+(i/(n-1))*chartW;
-      ctx.fillText(String(i+1),x,H-padB+12);
-    }
+    if(i%2===0) ctx.fillText(String(i+1),pL+(i/(n-1))*cW,H-pB+12);
   });
-
-  // Legend
-  ctx.fillStyle='rgba(75,167,247,0.7)';ctx.fillRect(padL,H-10,16,4);
-  ctx.fillStyle='rgba(0,255,127,0.4)';ctx.font='9px "Share Tech Mono"';ctx.textAlign='left';
-  ctx.fillText('rolling mean',padL+20,H-6);
-  ctx.beginPath();ctx.arc(padL+110,H-8,4,0,Math.PI*2);ctx.fillStyle='#00ff7f';ctx.fill();
-  ctx.fillStyle='rgba(0,255,127,0.4)';ctx.fillText('reward=1.0',padL+118,H-6);
 }
 
-// Animate bar chart on scroll
 function animateBars(){
-  if(barProgress<1){
-    barProgress=Math.min(1,barProgress+0.04);
-    drawBarChart(barProgress);
-    requestAnimationFrame(animateBars);
-  }
+  if(barProgress<1){barProgress=Math.min(1,barProgress+0.04);drawBarChart(barProgress);requestAnimationFrame(animateBars);}
 }
 
-const observer=new IntersectionObserver(entries=>{
+const resultsObs=new IntersectionObserver(entries=>{
   entries.forEach(e=>{
     if(e.isIntersecting&&!barAnimated&&e.target.id==='results'){
-      barAnimated=true;
-      animateBars();
-      drawLineChart();
+      barAnimated=true;animateBars();drawLineChart();
     }
   });
 },{threshold:0.3});
 const resultsSection=document.getElementById('results');
-if(resultsSection)observer.observe(resultsSection);
+if(resultsSection) resultsObs.observe(resultsSection);
 
-// Initial render at 0 in case already visible
 drawBarChart(0);
 drawLineChart();
-
-// ═══════════════════════════════════════════════
-// NEURAL REWIRING
-// ═══════════════════════════════════════════════
-const NW_EDGES = [
-  { w0:0.85, w16:0.35, color:'#4fc3f7' }, // UAL→A
-  { w0:0.15, w16:0.65, color:'#ffb300' }, // UAL→B
-  { w0:0.80, w16:0.55, color:'#4fc3f7' }, // DAL→A
-  { w0:0.20, w16:0.45, color:'#ffb300' }, // DAL→B
-  { w0:0.75, w16:0.30, color:'#4fc3f7' }, // SWA→A (emergency learns to vacate A)
-  { w0:0.25, w16:0.70, color:'#00ff7f' }, // SWA→B (emergency learns B)
-  { w0:0.82, w16:0.45, color:'#4fc3f7' }, // AAL→A
-  { w0:0.18, w16:0.55, color:'#ffb300' }, // AAL→B
-];
-
-function updateNW(step){
-  const t = step / 16;
-  NW_EDGES.forEach((e,i)=>{
-    const w = e.w0 + (e.w16 - e.w0) * t;
-    const el = document.getElementById('nw-e'+i);
-    if(!el) return;
-    el.style.strokeWidth = (w * 9 + 0.5).toFixed(2);
-    el.style.opacity = (0.12 + w * 0.88).toFixed(3);
-  });
-
-  // Collision ring
-  const ring = document.getElementById('nw-ring');
-  if(ring){
-    const risk = 1 - t;
-    ring.setAttribute('stroke', risk > 0.5 ? '#ff4444' : '#ffb300');
-    ring.style.opacity = (0.2 + risk * 0.7).toFixed(3);
-  }
-
-  // Metrics
-  const sym  = (0.95 - 0.53 * t).toFixed(2);
-  const coll = Math.round(96 - 73 * t) + '%';
-  const yld  = (0.17 + 0.11 * t).toFixed(2);
-
-  const symEl  = document.getElementById('nw-sym');
-  const collEl = document.getElementById('nw-coll');
-  const yldEl  = document.getElementById('nw-yield');
-
-  if(symEl){
-    symEl.textContent = sym;
-    symEl.className = 'nw-metric-val' + (t > 0.5 ? ' improved' : '');
-  }
-  if(collEl){
-    collEl.textContent = coll;
-    collEl.className = 'nw-metric-val' + (t > 0.5 ? ' improved' : '');
-  }
-  if(yldEl){
-    yldEl.textContent = yld;
-    yldEl.className = 'nw-metric-val' + (t > 0.3 ? ' improved' : '');
-  }
-
-  const stepSvg = document.getElementById('nw-step-svg');
-  if(stepSvg) stepSvg.textContent = step;
-  const stepLbl = document.getElementById('nw-step-label');
-  if(stepLbl) stepLbl.textContent = step + ' / 16';
-}
-
-// Ring pulse animation
-let _nwRingPhase = 0;
-function _animateNwRing(){
-  _nwRingPhase += 0.04;
-  const ring = document.getElementById('nw-ring');
-  if(ring){
-    const step = parseInt(document.getElementById('nw-slider')?.value || '0');
-    const t = step / 16;
-    const pulse = Math.sin(_nwRingPhase) * 4 * (1 - t * 0.85);
-    const baseR = 32 - t * 10;
-    ring.setAttribute('r', (baseR + pulse).toFixed(1));
-  }
-  requestAnimationFrame(_animateNwRing);
-}
-
-document.addEventListener('DOMContentLoaded', ()=>{
-  const slider = document.getElementById('nw-slider');
-  if(slider){
-    slider.addEventListener('input', ()=> updateNW(parseInt(slider.value)));
-    updateNW(0);
-  }
-  _animateNwRing();
-});
 </script>
 </body>
 </html>
