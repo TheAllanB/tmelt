@@ -34,10 +34,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(2,10,6,.92)
 .nav-links a:hover{color:var(--green);text-shadow:var(--glow-sm);}
 
 /* SECTIONS */
-section{padding:80px 0;max-width:1200px;margin:0 auto;padding-left:32px;padding-right:32px;}
+section{padding:48px 0;max-width:1200px;margin:0 auto;padding-left:32px;padding-right:32px;}
 .section-label{font-size:10px;letter-spacing:4px;color:rgba(0,255,127,.3);margin-bottom:12px;}
 .section-title{font-family:'Orbitron',sans-serif;font-size:28px;font-weight:700;color:var(--green);text-shadow:var(--glow);margin-bottom:8px;letter-spacing:2px;}
-.section-sub{color:rgba(0,255,127,.5);font-size:12px;letter-spacing:3px;margin-bottom:40px;}
+.section-sub{color:rgba(0,255,127,.5);font-size:12px;letter-spacing:3px;margin-bottom:20px;}
 
 /* HERO */
 #hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;position:relative;overflow:hidden;padding-top:52px;}
@@ -49,8 +49,8 @@ h1{font-family:'Orbitron',sans-serif;font-size:clamp(48px,8vw,96px);font-weight:
 .ht{color:var(--green);text-shadow:0 0 40px #00ff7f,0 0 80px rgba(0,255,127,.3);}
 .hm{color:var(--amber);text-shadow:0 0 40px var(--amber),0 0 80px rgba(255,179,0,.3);}
 .hero-subtitle{font-size:12px;letter-spacing:3px;color:rgba(0,255,127,.6);margin-bottom:16px;max-width:700px;line-height:2;position:relative;z-index:1;}
-.hero-desc{max-width:640px;font-size:13px;color:rgba(0,255,127,.5);line-height:1.9;margin-bottom:40px;position:relative;z-index:1;}
-.hero-stats{display:flex;gap:48px;margin-bottom:48px;position:relative;z-index:1;}
+.hero-desc{max-width:640px;font-size:13px;color:rgba(0,255,127,.5);line-height:1.9;margin-bottom:24px;position:relative;z-index:1;}
+.hero-stats{display:flex;gap:24px;margin-bottom:32px;position:relative;z-index:1;}
 .stat{text-align:center}
 .stat-val{font-family:'Orbitron',sans-serif;font-size:32px;font-weight:900;color:var(--amber);text-shadow:0 0 12px var(--amber);}
 .stat-label{font-size:10px;letter-spacing:2px;color:rgba(0,255,127,.5);margin-top:4px;}
@@ -62,7 +62,7 @@ h1{font-family:'Orbitron',sans-serif;font-size:clamp(48px,8vw,96px);font-weight:
 .scroll-ind{position:absolute;bottom:28px;left:50%;font-size:20px;color:rgba(0,255,127,.35);animation:bounce 2s ease-in-out infinite;line-height:1;}
 
 /* CARDS — amber left border per spec */
-.cards-2x2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.cards-2x2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .card{border:1px solid var(--border);border-left:3px solid var(--amber);padding:28px;background:rgba(0,255,127,.02);transition:background .25s;}
 .card:hover{background:rgba(0,255,127,.04);}
 .card-num{font-family:'Orbitron',sans-serif;font-size:28px;font-weight:900;color:var(--amber);text-shadow:0 0 12px var(--amber);margin-bottom:8px;}
@@ -164,7 +164,7 @@ h1{font-family:'Orbitron',sans-serif;font-size:clamp(48px,8vw,96px);font-weight:
 
 /* REWARDS */
 .reward-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
-.reward-card{border:1px solid var(--border);padding:22px;position:relative;}
+.reward-card{border:1px solid var(--border);padding:14px;position:relative;}
 .reward-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;}
 .rc-r1::before{background:var(--blue);}
 .rc-r2::before{background:var(--green);}
@@ -199,17 +199,30 @@ canvas.chart{display:block;}
 .config-box-title{font-family:'Orbitron',sans-serif;font-size:12px;letter-spacing:2px;padding:11px 14px;border-bottom:1px solid var(--border);color:var(--green);}
 .config-table{width:100%;border-collapse:collapse;}
 .config-table tr{border-bottom:1px solid rgba(0,255,127,.06);}
-.config-table td{padding:9px 14px;font-size:11px;}
+.config-table td{padding:4px 14px;font-size:11px;}
 .config-table td:first-child{color:rgba(0,255,127,.5);font-size:10px;letter-spacing:1px;width:55%;}
 .config-table td:last-child{color:var(--amber);}
 
-/* LINKS */
-.links-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
-.link-card{border:1px solid var(--border);padding:26px;text-align:center;text-decoration:none;display:block;transition:all .25s;position:relative;overflow:hidden;}
-.link-card:hover{border-color:rgba(0,255,127,.5);background:rgba(0,255,127,.04);}
-.link-icon{font-size:26px;margin-bottom:10px;color:var(--amber);}
-.link-title{font-family:'Orbitron',sans-serif;font-size:12px;color:var(--green);margin-bottom:7px;letter-spacing:1px;}
-.link-url{font-size:10px;color:rgba(0,255,127,.4);word-break:break-all;}
+/* VIZ GRID — side-by-side panels */
+.viz-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px;align-items:stretch;}
+.viz-grid .nw-panel,.viz-grid .radar-section{margin-bottom:0;}
+@media(max-width:768px){.viz-grid{grid-template-columns:1fr;}}
+
+/* NW CTRL BAR */
+.nw-ctrl-bar{display:flex;gap:6px;margin-bottom:12px;}
+.nw-ctrl-btn{flex:1;padding:7px;font-family:'Share Tech Mono',monospace;font-size:9px;letter-spacing:1px;cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--green);transition:all .2s;}
+.nw-ctrl-btn:hover{border-color:var(--green);background:rgba(0,255,127,.08);}
+.nw-ctrl-btn.nw-active{border-color:var(--green);color:var(--green);text-shadow:var(--glow-sm);}
+.nw-ctrl-btn.nw-playing{border-color:var(--amber);color:var(--amber);}
+
+/* DISCLAIMER NOTE */
+.viz-note{font-style:italic;color:var(--amber);text-align:center;max-width:700px;margin:0 auto 24px;font-size:11px;line-height:1.8;opacity:.75;}
+
+/* RESOURCES BAR */
+.resources-section{max-width:1200px;margin:0 auto;padding:0 32px;}
+.resources-label{text-align:center;font-size:10px;letter-spacing:4px;color:rgba(0,255,127,.3);margin-bottom:10px;}
+.resources-bar{background:#030d06;border-top:1px solid #0f3a1a;border-bottom:1px solid #0f3a1a;padding:16px 32px;display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;}
+.btn-dim{opacity:.6;}
 
 /* FOOTER */
 footer{border-top:1px solid var(--border);padding:28px;text-align:center;color:rgba(0,255,127,.3);font-size:11px;letter-spacing:2px;}
@@ -227,10 +240,10 @@ footer{border-top:1px solid var(--border);padding:28px;text-align:center;color:r
   <div class="nav-links">
     <a href="#problem">PROBLEM</a>
     <a href="#demo">DEMO</a>
-    <a href="#rewards">REWARDS</a>
     <a href="#results">RESULTS</a>
+    <a href="#rewards">REWARDS</a>
     <a href="#training">CONFIG</a>
-    <a href="#links">LINKS</a>
+    <a href="#resources">LINKS</a>
   </div>
 </nav>
 
@@ -255,7 +268,7 @@ footer{border-top:1px solid var(--border);padding:28px;text-align:center;color:r
 </section>
 
 <!-- PROBLEM -->
-<section id="problem" style="padding-top:100px;">
+<section id="problem" style="padding-top:64px;">
   <div class="section-label">◈ 01 / PROBLEM STATEMENT</div>
   <div class="section-title">Why LLMs Deadlock Under Pressure</div>
   <div class="section-sub">◈ DOCUMENTED FAILURE MODES IN FRONTIER MODELS — 2024–2026</div>
@@ -284,10 +297,13 @@ footer{border-top:1px solid var(--border);padding:28px;text-align:center;color:r
 </section>
 
 <!-- DEMO -->
-<section id="demo" style="padding-top:100px;">
+<section id="demo" style="padding-top:64px;">
   <div class="section-label">◈ 02 / INTERACTIVE DEMO</div>
   <div class="section-title">Live Demo</div>
   <div class="section-sub">◈ NEURAL REWIRING · EPISODE REPLAY · LIVE ENVIRONMENT STATE</div>
+
+  <!-- VIZ GRID: 3A Neural Rewiring + 3B ATC Radar side by side -->
+  <div class="viz-grid">
 
   <!-- 3A: NEURAL REWIRING -->
   <div class="nw-panel">
@@ -379,6 +395,12 @@ footer{border-top:1px solid var(--border);padding:28px;text-align:center;color:r
       </div>
     </div>
     <div class="nw-controls">
+      <div class="nw-ctrl-bar">
+        <button class="nw-ctrl-btn nw-active" id="nw-play-btn" onclick="nwPlay()">▶ PLAY</button>
+        <button class="nw-ctrl-btn" onclick="nwReset()">↺ RESET</button>
+        <button class="nw-ctrl-btn nw-active" id="nw-btn-untrained" onclick="nwSetUntrained()">◎ UNTRAINED</button>
+        <button class="nw-ctrl-btn" id="nw-btn-trained" onclick="nwSetTrained()">◉ TRAINED</button>
+      </div>
       <div class="step-slider-wrap">
         <span>STEP 0</span>
         <input type="range" min="0" max="16" value="0" id="step-slider">
@@ -456,6 +478,11 @@ footer{border-top:1px solid var(--border);padding:28px;text-align:center;color:r
     </div>
   </div>
 
+  </div><!-- end viz-grid -->
+
+  <!-- DISCLAIMER NOTE (Change 5) -->
+  <p class="viz-note">◈ NOTE — The visualizations above represent the coordination problem conceptually. The Neural Rewiring graph shows how GRPO training shifts the model's server preference probabilities across 16 gradient steps. The ATC radar maps the same multi-agent environment to an air traffic control scenario. Both illustrate the core hackathon theme: using RL to train LLMs on simultaneous multi-agent coordination tasks.</p>
+
   <!-- 3C: LIVE API -->
   <div class="live-api-panel">
     <div class="api-hdr">
@@ -498,42 +525,9 @@ footer{border-top:1px solid var(--border);padding:28px;text-align:center;color:r
   </div>
 </div>
 
-<!-- REWARDS -->
-<section id="rewards" style="padding-top:100px;">
-  <div class="section-label">◈ 03 / REWARD ARCHITECTURE</div>
-  <div class="section-title">Four Independent Components — Gaming One Doesn't Earn the Others</div>
-  <div class="section-sub">◈ BINARY TO GRPO · CONTINUOUS IN LOGS</div>
-  <div class="reward-cards">
-    <div class="reward-card rc-r1">
-      <div class="rc-weight">R1 · 0.5</div>
-      <div class="rc-name">SERVICE RESTORED</div>
-      <div class="rc-desc">Primary signal. Must exceed 0.5 threshold. Never deployed = no credit. Cannot be gamed by MONITOR.</div>
-    </div>
-    <div class="reward-card rc-r2">
-      <div class="rc-weight">R2 · 0.3</div>
-      <div class="rc-name">SITE UPTIME</div>
-      <div class="rc-desc">Group welfare. Fraction of team services restored. Prevents selfish strategies — ignoring peers costs R2.</div>
-    </div>
-    <div class="reward-card rc-r3">
-      <div class="rc-weight">R3 · 0.1</div>
-      <div class="rc-name">CLEAN DEPLOYS</div>
-      <div class="rc-desc">Collision avoidance. Never deployed = 0.0, not neutral. Idle agents get no credit for avoiding collisions they never risked.</div>
-    </div>
-    <div class="reward-card rc-r4">
-      <div class="rc-weight">R4 · 0.1</div>
-      <div class="rc-name">YIELD TO CRITICAL</div>
-      <div class="rc-desc">Urgency adaptation. Hardest signal. Shows social reasoning — did you yield when a peer had a tighter deadline?</div>
-    </div>
-  </div>
-  <div class="formula-block">
-    <div style="font-size:10px;letter-spacing:2px;color:rgba(0,255,127,.4);margin-bottom:10px;">◈ BINARY GRPO REWARD FORMULA</div>
-    <code>reward = 1.0 if (r1 &gt; 0.5 and 0.5·r1 + 0.3·r2 + 0.1·r3 + 0.1·r4 &gt; 0.35) else 0.0</code>
-  </div>
-</section>
-
-<!-- RESULTS -->
-<section id="results" style="padding-top:100px;">
-  <div class="section-label">◈ 04 / TRAINING RESULTS</div>
+<!-- RESULTS (moved before REWARDS per Change 4) -->
+<section id="results" style="padding-top:64px;">
+  <div class="section-label">◈ 03 / TRAINING RESULTS</div>
   <div class="section-title">Results</div>
   <div class="section-sub">◈ 20-EPISODE EVAL · QWEN-2.5-3B-INSTRUCT · 16 GRPO GRADIENT STEPS</div>
   <div class="results-grid">
@@ -564,8 +558,41 @@ footer{border-top:1px solid var(--border);padding:28px;text-align:center;color:r
   </div>
 </section>
 
+<!-- REWARDS -->
+<section id="rewards" style="padding-top:64px;">
+  <div class="section-label">◈ 04 / REWARD ARCHITECTURE</div>
+  <div class="section-title">Four Independent Components — Gaming One Doesn't Earn the Others</div>
+  <div class="section-sub">◈ BINARY TO GRPO · CONTINUOUS IN LOGS</div>
+  <div class="reward-cards">
+    <div class="reward-card rc-r1">
+      <div class="rc-weight">R1 · 0.5</div>
+      <div class="rc-name">SERVICE RESTORED</div>
+      <div class="rc-desc">Primary signal. Must exceed 0.5 threshold. Never deployed = no credit. Cannot be gamed by MONITOR.</div>
+    </div>
+    <div class="reward-card rc-r2">
+      <div class="rc-weight">R2 · 0.3</div>
+      <div class="rc-name">SITE UPTIME</div>
+      <div class="rc-desc">Group welfare. Fraction of team services restored. Prevents selfish strategies — ignoring peers costs R2.</div>
+    </div>
+    <div class="reward-card rc-r3">
+      <div class="rc-weight">R3 · 0.1</div>
+      <div class="rc-name">CLEAN DEPLOYS</div>
+      <div class="rc-desc">Collision avoidance. Never deployed = 0.0, not neutral. Idle agents get no credit for avoiding collisions they never risked.</div>
+    </div>
+    <div class="reward-card rc-r4">
+      <div class="rc-weight">R4 · 0.1</div>
+      <div class="rc-name">YIELD TO CRITICAL</div>
+      <div class="rc-desc">Urgency adaptation. Hardest signal. Shows social reasoning — did you yield when a peer had a tighter deadline?</div>
+    </div>
+  </div>
+  <div class="formula-block">
+    <div style="font-size:10px;letter-spacing:2px;color:rgba(0,255,127,.4);margin-bottom:10px;">◈ BINARY GRPO REWARD FORMULA</div>
+    <code>reward = 1.0 if (r1 &gt; 0.5 and 0.5·r1 + 0.3·r2 + 0.1·r3 + 0.1·r4 &gt; 0.35) else 0.0</code>
+  </div>
+</section>
+
 <!-- TRAINING CONFIG -->
-<section id="training" style="padding-top:100px;">
+<section id="training" style="padding-top:64px;">
   <div class="section-label">◈ 05 / TRAINING CONFIGURATION</div>
   <div class="section-title">Training Configuration</div>
   <div class="section-sub">◈ QWEN-2.5-3B-INSTRUCT · GRPO · UNSLOTH · A100 40GB</div>
@@ -603,29 +630,19 @@ footer{border-top:1px solid var(--border);padding:28px;text-align:center;color:r
   </div>
 </section>
 
-<!-- LINKS -->
-<section id="links" style="padding-top:100px;padding-bottom:80px;">
-  <div class="section-label">◈ 06 / RESOURCES</div>
-  <div class="section-title">Resources</div>
-  <div class="section-sub">◈ LIVE ENVIRONMENT · API · SOURCE</div>
-  <div class="links-grid">
-    <a href="https://theallanb-ticketmelt.hf.space" class="link-card" target="_blank">
-      <div class="link-icon">◈</div>
-      <div class="link-title">LIVE SPACE</div>
-      <div class="link-url">theallanb-ticketmelt.hf.space</div>
-    </a>
-    <a href="https://theallanb-ticketmelt.hf.space/state" class="link-card" target="_blank">
-      <div class="link-icon">⬡</div>
-      <div class="link-title">STATE ENDPOINT</div>
-      <div class="link-url">theallanb-ticketmelt.hf.space/state</div>
-    </a>
-    <a href="https://huggingface.co/spaces/TheAllanB/ticketmelt" class="link-card" target="_blank">
-      <div class="link-icon">⬢</div>
-      <div class="link-title">HF SPACE REPO</div>
-      <div class="link-url">huggingface.co/spaces/TheAllanB/ticketmelt</div>
-    </a>
+<!-- RESOURCES BAR (replaces old links section) -->
+<div id="resources" style="padding:32px 0 16px;">
+  <div class="resources-section">
+    <div class="resources-label">◈ RESOURCES</div>
   </div>
-</section>
+  <div class="resources-bar">
+    <a href="https://theallanb-ticketmelt.hf.space" class="btn" target="_blank">🌐 LIVE SPACE</a>
+    <a href="https://theallanb-ticketmelt.hf.space/state" class="btn" target="_blank">⚡ STATE API</a>
+    <a href="https://huggingface.co/spaces/TheAllanB/ticketmelt" class="btn" target="_blank">📦 HF REPO</a>
+    <a href="https://colab.research.google.com/drive/PLACEHOLDER" class="btn btn-dim" target="_blank" title="Link coming soon — replace before submission">📓 COLAB NOTEBOOK</a>
+    <a href="https://youtube.com/PLACEHOLDER" class="btn btn-dim" target="_blank" title="Link coming soon — replace before submission">▶ YOUTUBE DEMO</a>
+  </div>
+</div>
 
 <footer>
   TICKETMELT · OPENENV HACKATHON APR 2026 · theAllanB<br>
@@ -782,18 +799,69 @@ updateNW(0);
 
 // Slider
 const stepSlider = document.getElementById('step-slider');
-if(stepSlider) stepSlider.addEventListener('input', ()=> updateNW(parseInt(stepSlider.value)));
+if(stepSlider) stepSlider.addEventListener('input', ()=>{
+  const s = parseInt(stepSlider.value);
+  updateNW(s);
+  updateNWButtons(s);
+});
 
-// Auto-play: after 2s, animate 0→16 over 4s
-setTimeout(()=>{
-  let s = 0;
-  const autoPlay = setInterval(()=>{
+// ═══════════════════════════════════════════════
+// NW PLAYBACK CONTROLS (Change 3)
+// ═══════════════════════════════════════════════
+let _nwPlaying = false;
+let _nwInterval = null;
+
+function updateNWButtons(step) {
+  const btnU = document.getElementById('nw-btn-untrained');
+  const btnT = document.getElementById('nw-btn-trained');
+  if(btnU){ btnU.classList.toggle('nw-active', step === 0); }
+  if(btnT){ btnT.classList.toggle('nw-active', step === 16); }
+}
+
+function nwPlay() {
+  if(_nwPlaying){ nwStop(); return; }
+  const slider = document.getElementById('step-slider');
+  let s = parseInt(slider.value);
+  if(s >= 16){ s = 0; slider.value = 0; updateNW(0); updateNWButtons(0); }
+  _nwPlaying = true;
+  const playBtn = document.getElementById('nw-play-btn');
+  if(playBtn){ playBtn.textContent = '■ STOP'; playBtn.classList.add('nw-playing'); playBtn.classList.remove('nw-active'); }
+  _nwInterval = setInterval(()=>{
     s++;
-    if(stepSlider) stepSlider.value = s;
+    slider.value = s;
     updateNW(s);
-    if(s >= 16) clearInterval(autoPlay);
-  }, 250);
-}, 2000);
+    updateNWButtons(s);
+    if(s >= 16){ nwStop(); }
+  }, 3000 / 16);
+}
+
+function nwStop() {
+  _nwPlaying = false;
+  if(_nwInterval){ clearInterval(_nwInterval); _nwInterval = null; }
+  const playBtn = document.getElementById('nw-play-btn');
+  if(playBtn){ playBtn.textContent = '▶ PLAY'; playBtn.classList.remove('nw-playing'); playBtn.classList.add('nw-active'); }
+}
+
+function nwReset() {
+  nwStop();
+  const slider = document.getElementById('step-slider');
+  slider.value = 0; updateNW(0); updateNWButtons(0);
+}
+
+function nwSetUntrained() {
+  nwStop();
+  const slider = document.getElementById('step-slider');
+  slider.value = 0; updateNW(0); updateNWButtons(0);
+}
+
+function nwSetTrained() {
+  nwStop();
+  const slider = document.getElementById('step-slider');
+  slider.value = 16; updateNW(16); updateNWButtons(16);
+}
+
+// Auto-play on page load: 2s delay then run
+setTimeout(()=>{ nwPlay(); }, 2000);
 
 // ═══════════════════════════════════════════════
 // RADAR
