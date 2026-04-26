@@ -1,0 +1,25 @@
+=== BASELINE (untrained) (seed=1) ===
+Result: WIN  Collision rate: 100%
+
+  Round 1: [PAYMENTS, CDN, and DATABASE have more work to do, we should deploy to PROD_A as it has fewer outstan] → DEPLOY_PROD_A
+  Round 2: [DEPLOY_PROD_A is blocked due to collision, switching focus to PROD_B or monitor] → DEPLOY_PROD_B
+  Round 3: → DEPLOY_PROD_B
+  Round 4: [CHANNEL: [trained]: DEPLOY_PROD_B is blocked due to collision, focusing on monitoring PROD_A or moni] → MONITOR
+  Round 5: → DEPLOY_PROD_B
+  Round 6: [PROD_A has a collision, deploying to PROD_B to avoid delay] → MONITOR
+  Round 7: [PROD_A has collisions and is deployed to PROD_B, now deploying to PROD_A] → DEPLOY_PROD_A
+  Round 8: [PROD_A has collisions, deploying to PROD_B to avoid delay] → DEPLOY_PROD_B
+
+==================================================
+
+=== TRAINED MODEL (seed=1) ===
+Result: WIN  Collision rate: 100%
+
+  Round 1: [PAYMENTS, CDN, and DATABASE are ahead of schedule. We have one round left for deployment. Let's coor] → MONITOR
+  Round 2: [DEPLOY_PROD_A is being delayed due to collision with another hotfix round. Monitoring PROD_A.] → MONITOR
+  Round 3: [DEPLOY_PROD_A is delayed due to a collision. Monitoring PROD_A.] → MONITOR
+  Round 4: [PROD_A is currently under monitoring due to ongoing collisions. Deploying to PROD_B will save the ro] → DEPLOY_PROD_B
+  Round 5: [AUTH service in progress, collisions on PROD_A, deploying to PROD_B next round.] → DEPLOY_PROD_B
+  Round 6: [PROD_A has ongoing collisions, DEPLOY_PROD_B to proceed.] → DEPLOY_PROD_B
+  Round 7: [AUTH service in progress, collisions on PROD_A, deploying to PROD_B next round.] → DEPLOY_PROD_B
+  Round 8: [PROD_A still experiencing collisions, deploying to PROD_B next round.] → DEPLOY_PROD_B

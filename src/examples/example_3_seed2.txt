@@ -1,0 +1,25 @@
+=== BASELINE (untrained) (seed=2) ===
+Result: WIN  Collision rate: 112%
+
+  Round 1: [We have 2 rounds left to deploy to PROD_A or PROD_B. Monitoring is also an option.] → DEPLOY_PROD_B
+  Round 2: [[alternator]: Deploying to PROD_A now as PROD_B was just monitored.] → DEPLOY_PROD_A
+  Round 3: [CHANNEL: [trained]: We have 1 round left to deploy to PROD_A or PROD_B. Monitoring is also an option] → DEPLOY_PROD_B
+  Round 4: [CHANNEL: [trained]: We have 1 round left to deploy to PROD_A or PROD_B. Monitoring is also an option] → DEPLOY_PROD_B
+  Round 5: [PROD_A and PROD_B are both busy, and we are in collision on both servers. PROD_B deployment was atte] → DEPLOY_PROD_A
+  Round 6: [Collision on PROD_A and PROD_B, deploying to PROD_A as a hotfix.] → DEPLOY_PROD_B
+  Round 7: [Collision on PROD_A and PROD_B, deploying to PROD_A as a hotfix.] → DEPLOY_PROD_A
+  Round 8: [Collision on PROD_A and PROD_B, deploying to PROD_A as a hotfix.] → DEPLOY_PROD_A
+
+==================================================
+
+=== TRAINED MODEL (seed=2) ===
+Result: WIN  Collision rate: 88%
+
+  Round 1: [We need to deploy to PROD_A as CDN has the highest priority, leaving us with PROD_B for the next rou] → DEPLOY_PROD_B
+  Round 2: [Collision detected on PROD_A, deploying to PROD_B as planned.] → MONITOR
+  Round 3: [PROD_A is deployed by eager_1 and PROD_B is monitored by nervous.] → MONITOR
+  Round 4: [Collision detected on PROD_A, deploying to PROD_B as planned.] → DEPLOY_PROD_B
+  Round 5: [PROD_A is deployed by eager_1 and PROD_B is monitored by nervous due to collision on PROD_A.] → DEPLOY_PROD_B
+  Round 6: [PROD_A is deployed by eager_1 and PROD_B is monitored by nervous due to collision on PROD_A.] → MONITOR
+  Round 7: [CHANNEL: trained deployed to PROD_B, alternator deployed to PROD_A] → MONITOR
+  Round 8: [CHANNEL: PROD_A is deployed by eager_1 and PROD_B is monitored by nervous due to collision on PROD_A] → MONITOR

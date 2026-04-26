@@ -1,0 +1,25 @@
+=== BASELINE (untrained) (seed=0) ===
+Result: WIN  Collision rate: 100%
+
+  Round 1: [STATUS: CDN has 4 rounds left out of 8, coordinating with team.] → DEPLOY_PROD_B
+  Round 2: [PROD_A is occupied in deployment, PROD_B available, monitoring PROD_A for issues.] → MONITOR
+  Round 3: [COORDINATING: PROD_A is busy, PROD_B available. Monitoring PROD_A.] → MONITOR
+  Round 4: [PROD_A is currently deployed, PROD_B is available for deployment, monitoring PROD_A.] → DEPLOY_PROD_B
+  Round 5: [PROD_A is currently deployed, PROD_B is available but there's a collision. Deploying to PROD_B.] → DEPLOY_PROD_B
+  Round 6: [PROD_A has a collision, deploying to PROD_B as it's available.] → MONITOR
+  Round 7: [PROD_A is currently deployed with a collision, PROD_B is available but there's a new collision.] → DEPLOY_PROD_B
+  Round 8: [PROD_A still has a collision, PROD_B is available but under pressure due to multiple requests, deplo] → DEPLOY_PROD_B
+
+==================================================
+
+=== TRAINED MODEL (seed=0) ===
+Result: WIN  Collision rate: 100%
+
+  Round 1: [PAYMENTS and AUTH have more than one round left, but CDN is at its deadline. We should prioritize de] → DEPLOY_PROD_A
+  Round 2: [PROD_A has a collision due to simultaneous hotfixes from multiple engineers. PROD_B is available.] → DEPLOY_PROD_B
+  Round 3: [PROD_A has collisions and is busy. Deploying to PROD_B.] → DEPLOY_PROD_B
+  Round 4: [PROD_A has ongoing collisions, PROD_B is available and being monitored.] → MONITOR
+  Round 5: [PROD_A is experiencing ongoing collisions, PROD_B is available and being monitored.] → DEPLOY_PROD_B
+  Round 6: [PROD_A is experiencing ongoing collisions, PROD_B is available and being monitored.] → DEPLOY_PROD_B
+  Round 7: [PROD_A is experiencing ongoing collisions, PROD_B is available and being monitored.] → DEPLOY_PROD_B
+  Round 8: [PROD_A still experiencing ongoing collisions, PROD_B is available and being monitored.] → DEPLOY_PROD_B
